@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.29/schema.json",
+  "app_specific_configuration_path": "$Env:KOMOREBI_CONFIG_HOME/applications.yaml",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "default_workspace_padding": 0,
+  "default_container_padding": 0,
+  "border": false,
+  "border_width": 0,
+  "border_offset": 0,
+  "stackbar": {
+    "height": 15,
+    "mode": "OnStack",
+    "tabs": {
+      "width": 100,
+      "font_size": 12,
+      "font_familiy": "JetBrains Mono",
+      "unfocused_text": "#DCD7BA",
+      "focused_text": "#7FB4CA",
+      "background": "#1F1F28"
+    }
+  },
+  "monitors": [
+    {
+      "workspaces": [
+        {
+          "name": "I",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "II",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "III",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "IV",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "V",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "VI",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        },
+        {
+          "name": "VII",
+          "layout_rules": {
+            "1": "UltrawideVerticalStack"
+          },
+          "custom_layout_rules": {
+            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
+          }
+        }
+      ]
+    },
+  ]
+}

@@ -1,7 +1,15 @@
 *
 !.gitignore
 !/.config/
+
 !.config/nvim
 !.config/nvim/**
+
 !/.config/fish/
 !.config/fish/**
+
+!/.config/komorebi/
+!.config/komorebi/**
+
+!/.config/wezterm/
+!.config/wezterm/**
