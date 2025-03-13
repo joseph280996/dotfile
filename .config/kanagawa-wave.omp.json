@@ -1,0 +1,197 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "black": "#16161D",
+    "blue": "#7E9CD8",
+    "bright-black": "#727169",
+    "bright-blue": "#7FB4CA",
+    "bright-cyan": "#7AA89F",
+    "bright-green": "#98BB6C",
+    "bright-magenta": "#938AA9",
+    "bright-red": "#E82424",
+    "bright-white": "#DCD7BA",
+    "bright-yellow": "#E6C384",
+    "cyan": "#6A9589",
+    "diag-error": "p:bright-red",
+    "diag-hint": "p:cyan",
+    "diag-info": "#658594",
+    "diag-ok": "p:bright-green",
+    "diag-warning": "#FF9E3B",
+    "git-added": "p:green",
+    "git-changed": "#DCA561",
+    "git-removed": "p:red",
+    "green": "#76946A",
+    "magenta": "#957FB8",
+    "none": "transparent",
+    "red": "#C34043",
+    "special": "p:bright-magenta",
+    "white": "#C8C093",
+    "yellow": "#C0A36E"
+  },
+  "valid_line": {
+    "template": "\uea9c ",
+    "foreground": "p:diag-ok",
+    "background": "p:none"
+  },
+  "secondary_prompt": {
+    "template": "...   ",
+    "foreground": "p:bright-black",
+    "background": "p:none"
+  },
+  "error_line": {
+    "template": "\uea9c ",
+    "foreground": "p:diag-error",
+    "background": "p:none"
+  },
+  "pwd": "osc7",
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "overflow": "hide",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "\udb85\udc0b",
+          "foreground": "p:diag-warning",
+          "background": "p:none",
+          "type": "root",
+          "style": "plain"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "{{ if .SSHSession }}\ueb39 {{ end }}{{ .UserName }}@{{ .HostName }}",
+          "background": "p:none",
+          "type": "session",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if .Root }}p:red{{ else }}p:magenta{{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "max_depth": 2,
+            "mixed_threshold": 5,
+            "style": "agnoster_full"
+          },
+          "foreground": "p:blue",
+          "background": "p:none",
+          "type": "path",
+          "style": "plain",
+          "templates": [
+            "{{ if not .Writable }} <p:yellow>\uea75{{ else }}{{ end }}",
+            " {{ path .Path .Location }}</>"
+          ]
+        },
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none"
+          },
+          "background": "p:none",
+          "type": "project",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if .Type }}",
+            "{{ if eq .Type \"node\" }}#5c8763{{ end }}",
+            "{{ if eq .Type \"cargo\" }}#b74f0e{{ end }}",
+            "{{ if eq .Type \"poetry\" }}#4f5dd6{{ end }}",
+            "{{ if eq .Type \"php\" }}#777bb3{{ end }}",
+            "{{ if eq .Type \"nuspec\" }}#1188d6{{ end }}",
+            "{{ if eq .Type \"dotnet\" }}#5c2992{{ end }}",
+            "{{ if eq .Type \"julia\" }}#6682df{{ end }}",
+            "{{ if eq .Type \"powershell\" }}#0276bc{{ end }}",
+            "{{ else }}p:fg-dim{{ end }}"
+          ],
+          "templates": [
+            "{{ if .Version }} [{{ .Version }}{{ if .Name }} {{ .Name }}{{ end }}]{{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "branch_icon": "\udb80\udea2 ",
+            "cache_duration": "none",
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "status_formats": {
+              "Added": "<p:git-added>+%d</>",
+              "Deleted": "<p:git-removed>-%d</> ",
+              "Modified": "<p:git-changed>~%d </> ",
+              "Unmerged": "<p:diag-info>X%d</> ",
+              "Untracked": "<p:diag-warning>?%d</> "
+            }
+          },
+          "type": "git",
+          "style": "plain",
+          "templates": [
+            " <p:special>{{ .HEAD }}</>",
+            "{{ if or (gt .Ahead 0) (gt .Behind 0) }} <p:bright-cyan>{{ .BranchStatus }}</>{{ end }}",
+            "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}",
+            "{{ if or (and .Working.Changed .Staging.Changed) (gt .StashCount 0) }}| {{ end }}",
+            "{{ if (gt .Staging.Added 0) }}{{ .Staging.String }}{{ end }}",
+            "{{ if gt .StashCount 0 }}<p:blue>*{{ .StashCount }}</>{{ end }}"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none",
+            "style": "austin",
+            "threshold": 500
+          },
+          "template": " [{{ .FormattedMs }}]",
+          "foreground": "p:bright-black",
+          "type": "executiontime",
+          "style": "plain"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none",
+            "status_separator": " | "
+          },
+          "template": "({{ .Code }})",
+          "type": "status",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if (gt .Code 0) }}p:diag-error{{ else }}p:diag-ok{{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": " \uea9c",
+          "foreground": "p:bright-white",
+          "background": "p:none",
+          "type": "text",
+          "style": "plain"
+        }
+      ],
+      "newline": true
+    }
+  ],
+  "version": 3,
+  "shell_integration": true,
+  "final_space": true
+}

@@ -1,0 +1,359 @@
+{
+    "apps": [
+        {
+            "Info": "",
+            "Version": "24.09",
+            "Updated": "2025-02-02T22:16:05.1966647-05:00",
+            "Name": "7zip",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "2.0.19",
+            "Updated": "2025-02-19T12:31:00.4669262-05:00",
+            "Name": "autohotkey",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "2024-12-31",
+            "Updated": "2025-02-02T22:16:05.7965683-05:00",
+            "Name": "cacert",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "3.3.0",
+            "Updated": "2024-11-23T12:19:54.6411791-05:00",
+            "Name": "CascadiaMono-NF",
+            "Source": "nerd-fonts"
+        },
+        {
+            "Info": "",
+            "Version": "3.3.0",
+            "Updated": "2024-11-23T12:20:00.4230465-05:00",
+            "Name": "CascadiaMono-NF-Propo",
+            "Source": "nerd-fonts"
+        },
+        {
+            "Info": "",
+            "Version": "2.16.0",
+            "Updated": "2024-10-30T17:52:52.1213123-04:00",
+            "Name": "cppcheck",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "12.8.0_571.96",
+            "Updated": "2025-02-02T22:19:37.0042734-05:00",
+            "Name": "cuda",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "8.11.1_3",
+            "Updated": "2025-02-02T22:19:39.6988712-05:00",
+            "Name": "curl",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "3.14",
+            "Updated": "2024-08-17T11:29:25.107457-04:00",
+            "Name": "dark",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "7.5.2",
+            "Updated": "2024-08-17T11:22:11.0785804-04:00",
+            "Name": "dos2unix",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "nightly-20240817",
+            "Updated": "2024-08-17T11:51:17.3521572-04:00",
+            "Name": "dotnet-nightly",
+            "Source": "versions"
+        },
+        {
+            "Info": "",
+            "Version": "9.0.102",
+            "Updated": "2025-02-02T22:20:40.6935023-05:00",
+            "Name": "dotnet-sdk",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "6.0.428",
+            "Updated": "2024-11-23T12:21:17.8379796-05:00",
+            "Name": "dotnet6-sdk",
+            "Source": "versions"
+        },
+        {
+            "Info": "",
+            "Version": "7.0.410",
+            "Updated": "2024-08-17T12:02:44.2718726-04:00",
+            "Name": "dotnet7-sdk",
+            "Source": "versions"
+        },
+        {
+            "Info": "",
+            "Version": "10.2.0",
+            "Updated": "2024-09-20T10:10:09.1725563-04:00",
+            "Name": "fd",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "0.59.0",
+            "Updated": "2025-02-02T22:20:41.89548-05:00",
+            "Name": "fzf",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "2.66.1",
+            "Updated": "2025-02-02T22:20:43.0454155-05:00",
+            "Name": "gh",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "8.12.1",
+            "Updated": "2025-02-02T22:22:33.0634546-05:00",
+            "Name": "gradle",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "2.5.1",
+            "Updated": "2024-08-17T11:25:04.0456042-04:00",
+            "Name": "gsudo",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "2.64.1",
+            "Updated": "2025-02-02T22:22:35.7851676-05:00",
+            "Name": "innounp",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "1.7.1",
+            "Updated": "2024-08-17T11:25:04.5993336-04:00",
+            "Name": "jq",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "1.12.0",
+            "Updated": "2025-02-19T12:09:07.5714673-05:00",
+            "Name": "kdiff3",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "0.1.29",
+            "Updated": "2024-09-30T14:09:20.2675094-04:00",
+            "Name": "komorebi",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "19.1.7",
+            "Updated": "2025-02-02T22:23:00.8207835-05:00",
+            "Name": "llvm",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "5.4.7-2",
+            "Updated": "2024-10-17T10:56:53.2481742-04:00",
+            "Name": "lua",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "5.1.5-52",
+            "Updated": "2025-02-19T13:33:11.2222122-05:00",
+            "Name": "lua-for-windows",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "3.11.1",
+            "Updated": "2024-10-17T10:56:55.956026-04:00",
+            "Name": "luarocks",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "4.4.1",
+            "Updated": "2024-08-17T11:27:54.667901-04:00",
+            "Name": "make",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "6.3.1",
+            "Updated": "2024-08-17T12:30:38.3528661-04:00",
+            "Name": "mercurial",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "14.2.0-rt_v12-rev1",
+            "Updated": "2025-02-02T22:23:52.8114351-05:00",
+            "Name": "mingw",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "24.9.2-0",
+            "Updated": "2024-11-19T12:28:55.8838067-05:00",
+            "Name": "miniconda3",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "0.10.4",
+            "Updated": "2025-02-02T22:24:00.4418496-05:00",
+            "Name": "neovim",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "24.19.0",
+            "Updated": "2025-02-19T13:07:40.4770623-05:00",
+            "Name": "oh-my-posh",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "2.23.1",
+            "Updated": "2025-02-02T22:24:01.8496498-05:00",
+            "Name": "onefetch",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "3.4.16",
+            "Updated": "2024-11-12T22:41:59.0590951-05:00",
+            "Name": "opencv",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "7.5.0",
+            "Updated": "2025-02-02T22:24:06.6536695-05:00",
+            "Name": "pwsh",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "3.13.1",
+            "Updated": "2025-02-02T22:24:51.1481266-05:00",
+            "Name": "python",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "1.9.0",
+            "Updated": "2025-02-19T13:28:53.394906-05:00",
+            "Name": "raspberry-pi-imager",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "14.1.1",
+            "Updated": "2024-09-20T10:13:24.539459-04:00",
+            "Name": "ripgrep",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "3.5.2",
+            "Updated": "2025-02-19T12:07:08.5882156-05:00",
+            "Name": "sumatrapdf",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "0.25.1",
+            "Updated": "2025-02-02T22:24:52.107671-05:00",
+            "Name": "tree-sitter",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "9.1.0",
+            "Updated": "2024-08-17T11:30:32.7702446-04:00",
+            "Name": "vim",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "nightly-20250219",
+            "Updated": "2025-02-19T13:29:52.577163-05:00",
+            "Name": "wezterm-nightly",
+            "Source": "versions"
+        },
+        {
+            "Info": "",
+            "Version": "1.21.4",
+            "Updated": "2024-08-17T11:30:35.6070385-04:00",
+            "Name": "Wget",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "0.1.1",
+            "Updated": "2024-09-20T11:27:43.0600185-04:00",
+            "Name": "win32yank",
+            "Source": "main"
+        },
+        {
+            "Info": "",
+            "Version": "1.5.1",
+            "Updated": "2025-02-19T12:11:00.5280754-05:00",
+            "Name": "windhawk",
+            "Source": "extras"
+        },
+        {
+            "Info": "",
+            "Version": "2.5.1",
+            "Updated": "2024-08-17T11:30:36.1328726-04:00",
+            "Name": "winfetch",
+            "Source": "main"
+        }
+    ],
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main.git",
+            "Updated": "2025-02-19T11:30:19-05:00",
+            "Manifests": 1382
+        },
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": "2025-02-19T11:33:24-05:00",
+            "Manifests": 2129
+        },
+        {
+            "Name": "versions",
+            "Source": "https://github.com/ScoopInstaller/Versions",
+            "Updated": "2025-02-19T11:41:39-05:00",
+            "Manifests": 477
+        },
+        {
+            "Name": "nerd-fonts",
+            "Source": "https://github.com/matthewjberger/scoop-nerd-fonts",
+            "Updated": "2025-02-12T05:55:42-05:00",
+            "Manifests": 360
+        }
+    ]
+}
