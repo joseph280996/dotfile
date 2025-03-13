@@ -13,3 +13,18 @@
 
 !/.config/wezterm/
 !.config/wezterm/**
+
+!/.config/windhawk/
+!.config/windhawk/**
+
+!/.config/yasb/
+!.config/yasb/**
+.config/yasb/*.log*
+
+!/.config/kanagawa-wave.omp.json
+!/.config/install-win.sh
+!/.config/install.sh
+!/.config/Scoopfile.json
+
+!/packages/
+!/packages/**
