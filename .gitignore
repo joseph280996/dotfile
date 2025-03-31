@@ -21,6 +21,9 @@
 !.config/yasb/**
 .config/yasb/*.log*
 
+!/.config/zk/
+!.config/zk/**
+
 !/.config/kanagawa-wave.omp.json
 !/.config/install-win.sh
 !/.config/install.sh
