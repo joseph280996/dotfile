@@ -25,66 +25,31 @@
       "workspaces": [
         {
           "name": "I",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "BSP"
         },
         {
           "name": "II",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "VerticalStack"
         },
         {
           "name": "III",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "HorizontalStack"
         },
         {
           "name": "IV",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "UltrawideVerticalStack"
         },
         {
           "name": "V",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "Rows"
         },
         {
           "name": "VI",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "Grid"
         },
         {
           "name": "VII",
-          "layout_rules": {
-            "1": "UltrawideVerticalStack"
-          },
-          "custom_layout_rules": {
-            "9": "C:/Users/josep/.config/komorebi/wide_screen_layout.json"
-          }
+          "layout": "RightMainVerticalStack"
         }
       ]
     },
