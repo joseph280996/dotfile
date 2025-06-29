@@ -36,21 +36,29 @@ bars:
       bottom: 4
       right: 0
     widgets:
-      left: [ "win_button", "apps", "komorebi_active_layout", "active_window" ] 
+      left: [ "home", "apps", "komorebi_active_layout", "active_window" ] 
       center: [ "komorebi_workspaces", ]
       right: [ "media", "weather", "volume", "clock", "power_menu" ]
 widgets:
-  # disk:
-  #   type: "yasb.disk.DiskWidget"
-  #   options:
-  #       label: "{volume_label} {space[used][percent]}"
-  #       label_alt: "{volume_label} {space[used][gb]} / {space[total][gb]}"
-  #       volume_label: "C"
-  #       update_interval: 60 # Update interval in seconds
-  #       callbacks:
-  #         on_middle: "do_nothing"
-  #         on_right: "exec explorer C:\\" # Open disk C in file explorer
-
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      label: "<span>\udb80\udf5c</span>"
+      menu_list:
+        - { title: "Home", path: "~" }
+        - { title: "Downloads", path: "~\\Downloads"}
+        - { title: "Documents", path: "~\\Documents"}
+        - { title: "Pictures", path: "~\\Pictures"}
+        - { title: "Videos", path: "~\\Videos"}
+      system_menu: true
+      power_menu: false
+      blur: true
+      round_corners: true
+      round_corners_type: "small"
+      border_color: "#7aa2f7"
+      alignment: "left"
+      offset_left: 4
+      offset_top: 0
   media:
     type: "yasb.media.MediaWidget"
     options:
@@ -84,14 +92,6 @@ widgets:
       max_length_ellipsis: "..."
       monitor_exclusive: true
 
-  # battery:
-  #   type: "yasb.battery.BatteryWidget"
-  #   options:
-  #     label: "<span>{icon}</span>{percent}%"
-  #     label_alt: "{icon} {percent}% | time: {time_remaining}"
-  #     charging_options:
-  #       icon_format: "{charging_icon}"
-
   clock:
     type: "yasb.clock.ClockWidget"
     options:
@@ -100,44 +100,6 @@ widgets:
       #locale: 'en_EN' # Langugae for date, you can set your own, example fr_FR
       timezones: [] #Looking up time zone info from registry
       #timezones: ["America/Montreal"]
-
-  cpu:
-    type: "yasb.cpu.CpuWidget"
-    options:
-      label: "<span>\uf4bc</span> {info[percent][total]}%"
-      label_alt: "<span>\uf437</span> {info[histograms][cpu_percent]}"
-      update_interval: 2000
-      histogram_icons:
-        - '\u2581' # 0%
-        - '\u2581' # 10%
-        - '\u2582' # 20%
-        - '\u2583' # 30%
-        - '\u2584' # 40%
-        - '\u2585' # 50%
-        - '\u2586' # 60%
-        - '\u2587' # 70%
-        - '\u2588' # 80%+
-      histogram_num_columns: 8
-      callbacks:
-        on_right: "exec cmd /c Taskmgr"
-
-  memory:
-    type: "yasb.memory.MemoryWidget"
-    options:
-      label: "<span>\uf4bc</span> {virtual_mem_free}"
-      label_alt: "<span>\uf4bc</span> {virtual_mem_percent}%"
-      update_interval: 10000
-      callbacks:
-        on_right: "exec cmd /c Taskmgr"
-
-  language:
-    type: "yasb.language.LanguageWidget"
-    options:
-      label: "<span>\uf1ab</span> {lang[language_code]}-{lang[country_code]}"
-      label_alt: " {lang[full_name]}"
-      update_interval: 5 # 5 seconds
-      callbacks:
-        on_left: "toggle_label"
 
   komorebi_workspaces:
     type: "komorebi.workspaces.WorkspaceWidget"
@@ -178,42 +140,6 @@ widgets:
         on_left: 'next_layout'
         on_middle: 'toggle_monocle'
         on_right: 'prev_layout'
-
-  # wifi:
-  #   type: "yasb.wifi.WifiWidget"
-  #   options:
-  #     label: "<span>{wifi_icon}</span>"
-  #     label_alt: "{wifi_name} {wifi_strength}%"
-  #     update_interval: 5000
-  #     callbacks:
-  #       on_left: "exec cmd.exe /c start ms-settings:network"
-  #       on_middle: "do_nothing"
-  #       on_right: "toggle_label"
-
-  # traffic:
-  #   type: "yasb.traffic.TrafficWidget"
-  #   options:
-  #     label: "<span>\udb86\uddb3</span>{download_speed} | <span>\udb86\uddb2</span>{upload_speed}"
-  #     label_alt: "Download {download_speed} \ue621 Upload {upload_speed}"
-  #     update_interval: 1000 # Update interval should be a multiple of 1000
-  #     callbacks:
-  #       on_left: "toggle_label"
-  #       on_right: "exec cmd /c Taskmgr"
-
-  # ip_info:
-  #   type: "yasb.custom.CustomWidget"
-  #   options:
-  #     label: "<span>\udb81\udd9f</span> {data[ip]}"
-  #     label_alt: "<span>\uf450</span> {data[city]} {data[region]}, {data[country]}"
-  #     class_name: "ip-info-widget"
-  #     exec_options:
-  #       run_cmd: "curl.exe https://ipinfo.io"
-  #       run_interval: 120000  # every 5 minutes
-  #       return_format: "json"
-  #     callbacks:
-  #       on_left: "toggle_label"
-  #       on_middle: "exec cmd /c ncpa.cpl" # open network settings
-  #       on_right: "exec cmd /c start https://ipinfo.io/{data[ip]} " # open ipinfo in browser
 
   weather:
     type: "yasb.weather.WeatherWidget"
@@ -285,67 +211,4 @@ widgets:
         bottom: 0
         right: 0
       app_list:
-        #- {icon: "\udb80\ude39", launch: "C:\\Program Files\\Mozilla Firefox\\firefox.exe"}
-        # - {icon: "\uf0a2", launch: "notification_center"}
-        # - {icon: "\ueb51", launch: "quick_settings"}
-        #- {icon: "\uf46a", launch: "cmd.exe /c start ms-settings:windowsupdate"}
-        # - {icon: "\uf422", launch: "search"}
         - {icon: "\udb84\udf55", launch: "widget"}
-        # Currently available to use quick_settings, notification_center, search, widget, launcher (launcher will trigger ALT+A)
-  # github:
-  #   type: "yasb.github.GithubWidget"
-  #   options:
-  #     label: "<span>\ueba1</span>"
-  #     label_alt: "Notifications {data}" # {data} return number of unread notification
-  #     token: ghp_xxxxxxxxxxx # GitHub Personal access tokens (classic) https://github.com/settings/tokens
-  #     # You can set token: env, this means you have to set YASB_GITHUB_TOKEN in environment variable
-  #     max_notification: 20 # Max number of notification displaying in menu max: 50
-  #     only_unread: false # Show only unread or all notifications; 
-  #     max_field_size: 54 # Max characters in title before truncation.
-  #     menu_width: 400 
-  #     menu_height: 400 
-  #     menu_offset: 240 
-  #     update_interval: 300 # Check for new notification in seconds
-
-  # wallapers:
-  #   type: "yasb.wallpapers.WallpapersWidget"
-  #   options:
-  #     label: "<span>\udb83\ude09</span>"
-  #     image_path: "C:\\Users\\xxx\\Images" # Path to folder with images
-  #     change_automatically: false # Automatically change wallpaper
-  #     update_interval: 60 # If change_automatically is true, update interval in seconds
-
-  # taskbar:
-  #   type: "yasb.taskbar.TaskbarWidget"
-  #   options:
-  #     animation: false
-  #     icon_size: 16
-  #     ignore_apps:
-  #       processes: []
-  #       titles: []
-  #       classes: []
-  #     container_padding:
-  #       top: 0
-  #       left: 0
-  #       bottom: 0
-  #       right: 0
-
-  # nvidia_temp:
-  #   type: "yasb.custom.CustomWidget"
-  #   options:
-  #     label: "{data}<span>\udb81\udd04</span>"
-  #     label_alt: "{data}"
-  #     class_name: "system-widget"
-  #     exec_options:
-  #       run_cmd: "powershell nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader"
-  #       run_interval: 10000 # run every 10 sec
-  #       return_format: "string"
-
-  win_button:
-    type: "yasb.custom.CustomWidget"
-    options:
-      label: "\ue62a"
-      label_alt: "\ue62a"
-      class_name: "system-widget"
-      callbacks:
-        on_left: "exec start_menu"

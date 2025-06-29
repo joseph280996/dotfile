@@ -2,7 +2,7 @@
 	font-size: 12px;
 	color: #dcd7ba;
 	font-weight: 500;
-	font-family: "JetBrainsMono Nerd Font Mono";
+	font-family: "JetBrainsMono NFP";
 	margin: 0;
 	padding: 0;
 }
@@ -151,4 +151,41 @@
 /* WINDOW BTN WIDGET */
 .system-widget .label {
   font-size: 18px;
+}
+
+/* ================= */
+/* === HOME WIDGET === */
+/* ================= */
+.home-widget {
+    padding: 0 4px 0 12px;
+}
+
+.home-widget .icon {
+    font-size: 18px;
+    color: var(--subtext1);
+}
+
+.home-menu {
+    background-color: var(--mantle);
+    padding: 0;
+    margin-left: 2px;
+}
+
+.home-menu .menu-item {
+    padding: 8px 48px 8px 12px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.home-menu .menu-item:hover {
+    background-color: var(--lavender);
+    color: var(--surface0);
+    margin: 4px 6px;
+    border-radius: 4px;
+}
+
+.home-menu .separator {
+    max-height: 1px;
+    background-color: var(--overlay0);
+    margin: 0 8px;
 }
