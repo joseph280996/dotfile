@@ -36,9 +36,21 @@ bars:
       bottom: 4
       right: 0
     widgets:
-      left: [ "home", "apps", "komorebi_active_layout", "active_window" ] 
-      center: [ "komorebi_workspaces", ]
-      right: [ "media", "memory", "cpu", weather", "volume", "clock", "power_menu" ]
+      left: 
+        - "home"
+        - "apps"
+        - "komorebi_active_layout"
+        - "active_window"
+      center: 
+        - "komorebi_workspaces"
+      right: 
+        - "media"
+        - "memory"
+        - "cpu"
+        - "weather"
+        - "volume"
+        - "clock"
+        - "power_menu"
 widgets:
   home:
     type: "yasb.home.HomeWidget"
@@ -104,20 +116,28 @@ widgets:
   komorebi_workspaces:
     type: "komorebi.workspaces.WorkspaceWidget"
     options:
-        label_offline: "Komorebi Offline"
-        label_workspace_btn: "\udb85\udcfc"
-        label_workspace_active_btn: "\udb85\udcfb"
-        label_default_name: "{index}"
-        label_zero_index: false
-        hide_empty_workspaces: false
-        hide_if_offline: true
+      label_offline: "Komorebi Offline"
+      label_workspace_btn: "\udb85\udcfc"
+      label_workspace_active_btn: "\udb85\udcfb"
+      label_default_name: "{index}"
+      label_zero_index: false
+      hide_empty_workspaces: false
+      hide_if_offline: true
 
   komorebi_active_layout:
     type: "komorebi.active_layout.ActiveLayoutWidget"
     options:
       hide_if_offline: true
       label: "{icon}"
-      layouts: ['bsp', 'columns', 'rows', 'grid', 'vertical_stack', 'horizontal_stack', 'ultrawide_vertical_stack','right_main_vertical_stack']
+      layouts: 
+        - 'bsp'
+        - 'columns'
+        - 'rows'
+        - 'grid'
+        - 'vertical_stack'
+        - 'horizontal_stack'
+        - 'ultrawide_vertical_stack'
+        - 'right_main_vertical_stack'
       layout_icons:
         bsp: "BSP"
         columns: "COLS"
@@ -146,10 +166,10 @@ widgets:
     options:
       label: "<span>{icon}</span> {temp}"
       label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: '8604c14e7201455f85b42303240310' # Get your free API key from https://www.weatherapi.com/
+      api_key: "8604c14e7201455f85b42303240310" # Get your free API key from https://www.weatherapi.com/
       update_interval: 600 # Update interval in seconds, Min 600 seconds
       hide_decimal: true
-      location: 'USA Quincy 02169' # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE}, or just city.
+      location: "Quincy MA USA" # You can use "USA Los Angeles 90006" {COUNTRY CITY ZIP_CODE}, or just city.
       callbacks:
         on_left: "toggle_label"
       icons: 
@@ -163,9 +183,6 @@ widgets:
         snowyIcyNight: "\udb81\udd98"
         blizzard: "\uebaa"
         default: "\uebaa"
-        # https://www.weatherapi.com/docs/
-        # Usage {temp_c}, {min_temp_c}, {max_temp_c}, {temp_f}, {min_temp_f}, {max_temp_f}, {location}, {humidity}, {icon}, {conditions}
-
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
@@ -192,14 +209,10 @@ widgets:
       buttons:
         lock: ["\uea75","Lock"]
         signout: ["\udb80\udf43","Sign out"]
-        #sleep: ["\u23fe","Sleep"]
         shutdown: ["\uf011","Shut Down"]
         restart: ["\uead2","Restart"]
         hibernate: ["\uf28e","Hibernate"]
         cancel: ["\udb81\udf3a","Cancel"]
-        #force_shutdown: ["\uf011","Force Shut Down"]
-        #force_restart: ["\uead2","Force Restart"]
- 
 
   apps:
     type: "yasb.applications.ApplicationsWidget"
@@ -237,6 +250,7 @@ widgets:
         left: 0
         bottom: 0
         right: 5
+
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
