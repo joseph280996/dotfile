@@ -189,3 +189,36 @@
     background-color: var(--overlay0);
     margin: 0 8px;
 }
+
+/* CPU MEMORY Setting */
+.cpu-widget {
+    padding-right: 0;
+}
+.memory-widget {
+    padding-left: 0;
+}
+.cpu-widget .widget-container {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.memory-widget .widget-container {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.memory-widget .label {
+    min-width: 34px;
+    max-width: 34px;
+}
+.cpu-widget .label {
+    min-width: 34px;
+    max-width: 34px;
+}
+.cpu-widget .icon {
+  color: #7fb4ca;
+  margin-right: 4px;
+}
+.memory-widget .icon {
+  color: #7fb4ca;
+  margin-right: 4px;
+}
+
