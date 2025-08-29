@@ -27,6 +27,15 @@
 !/.config/git/
 !.config/git/**
 
+!/.config/winfetch/
+!.config/winfetch/**
+
+!/.config/gatsby/
+!.config/gatsby/config.json
+
+!/.config/scoop/
+!.config/scoop/**
+
 !/.config/kanagawa-wave.omp.json
 !/.config/install-win.sh
 !/.config/install.sh
