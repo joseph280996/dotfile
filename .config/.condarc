@@ -1,0 +1,5 @@
+create_default_packages:
+  - jupytext
+channels:
+  - conda-forge
+  - defaults

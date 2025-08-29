@@ -31,6 +31,12 @@
 !/.config/install-win.sh
 !/.config/install.sh
 !/.config/Scoopfile.json
+!/.config/.bashrc
+!/.config/.bash_profile
+!/.config/.npmrc
+!/.config/.yarnrc
+!/.config/installed_app.json
+!/.config/.condarc
 
 !/packages/
 !/packages/**
