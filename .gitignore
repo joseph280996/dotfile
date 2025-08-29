@@ -24,6 +24,9 @@
 !/.config/zk/
 !.config/zk/**
 
+!/.config/git/
+!.config/git/**
+
 !/.config/kanagawa-wave.omp.json
 !/.config/install-win.sh
 !/.config/install.sh
@@ -31,3 +34,4 @@
 
 !/packages/
 !/packages/**
+
