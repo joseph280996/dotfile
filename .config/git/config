@@ -1,0 +1,45 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+  clean = git-lfs clean -- %f
+
+[core]
+  editor = 'nvim'
+
+[alias]
+  nah = "!f(){ git reset --hard; git clean -df; if [ -d ".git/rebase-apply" ] || [ -d ".git/rebase-merge" ]; then git rebase --abort; fi; }; f"
+  p = pull
+    co = checkout
+    com = checkout master
+	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
+	s = status
+	puo = push origin HEAD -u
+	puf = push --force-with-lease
+	aa = add -A
+  c = commit
+  cm = commit -m
+	ms = merge --squash
+	rs = reset --soft
+	alias = "!f() { git config --global alias.$1 \"$2\"; }; f"
+	ustash = stash --include-untracked
+	ds = diff --full-index --staged
+	dm = diff --full-index  master...HEAD
+  ca = commit -a
+  ls = log --oneline --graph
+	stashp = stash pop
+	stashd = stash drop
+
+[credential "https://stash.ezesoft.net"]
+	provider = bitbucket
+[safe]
+	directory = %(prefix)///wsl.localhost/Arch/home/joseph280996/Work/IMSACNT-geneva-gateway
+	directory = D:/
+	directory = E:/Notebook/notes
+	directory = E:/Notebook/notes/School
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[includeIf "hasconfig:remote.*.url:git@github.com:joseph280996/**"]
+	path = ~/.config/git/config-personal
