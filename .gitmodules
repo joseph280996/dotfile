@@ -4,6 +4,3 @@
 [submodule ".config/wezterm"]
 	path = .config/wezterm
 	url = git@github.com:joseph280996/wezterm-config.git
-[submodule "packages/yasb"]
-	path = packages/yasb
-	url = git@github.com:amnweb/yasb.git
