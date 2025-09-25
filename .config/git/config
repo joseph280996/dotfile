@@ -30,16 +30,16 @@
 	stashp = stash pop
 	stashd = stash drop
 
-[credential "https://stash.ezesoft.net"]
-	provider = bitbucket
 [safe]
-	directory = %(prefix)///wsl.localhost/Arch/home/joseph280996/Work/IMSACNT-geneva-gateway
 	directory = D:/
 	directory = E:/Notebook/notes
 	directory = E:/Notebook/notes/School
+
 [commit]
 	gpgsign = true
+
 [tag]
 	gpgSign = true
-[includeIf "hasconfig:remote.*.url:git@github.com:joseph280996/**"]
-	path = ~/.config/git/config-personal
+
+[includeIf "hasconfig:remote.*.url:git@github.com:joseph280996/*"]
+	path = config-personal
