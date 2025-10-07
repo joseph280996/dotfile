@@ -8,16 +8,26 @@ if [[ -f /etc/os-release ]]; then
     else
         # Check if running in WSL (Windows Subsystem for Linux)
         if grep -q Microsoft /proc/version; then
-            echo "You are running Windows (WSL)"
+            [ ! -d "~/.config" ] && mkdir -p "~/.config"
+            ln ./nvim ~/.config/nvim
+            ln ./fish ~/.config/fish
+            ln ./git ~/.config/git
         else
             echo "You are running Linux ($PRETTY_NAME)"
+            [ ! -d "~/.config" ] && mkdir -p "~/.config"
+            ln ./nvim ~/.config/nvim
+            ln ./fish ~/.config/fish
+            ln ./git ~/.config/git
         fi
     fi
 elif [[ "$(uname)" == "Darwin" ]]; then
     # macOS detection
     echo "You are running macOS"
-    # Optional: Get specific macOS version
-    sw_vers | grep ProductVersion | awk '{print $2}'
+    [ ! -d "~/.config" ] && mkdir -p "~/.config"
+    ln ./nvim ~/.config/nvim
+    ln ./fish ~/.config/fish
+    ln ./git ~/.config/git
+
 else
     echo "Unknown operating system"
 fi
