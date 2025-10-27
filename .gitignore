@@ -39,6 +39,9 @@
 !/.config/kitty/
 !.config/kitty/**
 
+!/.config/aerospace/
+!.config/aerospace/**
+
 !/.config/kanagawa-wave.omp.json
 !/.config/install-win.sh
 !/.config/install.sh
