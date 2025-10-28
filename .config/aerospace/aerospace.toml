@@ -11,7 +11,7 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'Summoners War'
+if.app-id = 'com.com2us.smon.normal.freefull.apple.kr.ios.universal'
 run = 'layout floating'
 
 [mode.main.binding]
