@@ -1,5 +1,15 @@
 *
+!.bashrc
+!.bash_profile
+!.npmrc
+!.condarc
+!.yarnrc
+!install.sh
+!install-win.sh
+!Scoopfile.json
+!installed_app.json
 !.gitignore
+
 !/.config/
 
 !.config/nvim
@@ -42,6 +52,9 @@
 !/.config/aerospace/
 !.config/aerospace/**
 
+!/.config/latexmk/
+!.config/latexmk/**
+
 !/.config/kanagawa-wave.omp.json
 !/.config/install-win.sh
 !/.config/install.sh
@@ -52,7 +65,3 @@
 !/.config/.yarnrc
 !/.config/installed_app.json
 !/.config/.condarc
-
-!/packages/
-!/packages/**
-
