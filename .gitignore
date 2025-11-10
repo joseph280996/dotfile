@@ -6,6 +6,7 @@
 !.yarnrc
 !install.sh
 !install-win.sh
+!install.fish
 !Scoopfile.json
 !installed_app.json
 !.gitignore
@@ -55,13 +56,5 @@
 !/.config/latexmk/
 !.config/latexmk/**
 
-!/.config/kanagawa-wave.omp.json
-!/.config/install-win.sh
-!/.config/install.sh
-!/.config/Scoopfile.json
-!/.config/.bashrc
-!/.config/.bash_profile
-!/.config/.npmrc
-!/.config/.yarnrc
-!/.config/installed_app.json
-!/.config/.condarc
+!/.config/mcphub
+!.config/mcphub/**
