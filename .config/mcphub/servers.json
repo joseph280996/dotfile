@@ -1,8 +1,5 @@
 {
   "mcpServers": {
-    "Figma Desktop": {
-      "url": "http://127.0.0.1:3845/mcp"
-    },
     "fetch": {
       "args": [
         "mcp-server-fetch"
@@ -14,9 +11,15 @@
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "E:/config",
-        "~/Code/"
+        "C:/Users/josep/Code"
       ],
       "command": "npx"
+    },
+    "git": {
+      "args": [
+        "mcp-server-git"
+      ],
+      "command": "uvx"
     },
     "github": {
       "disabled": false,
@@ -25,21 +28,38 @@
       },
       "url": "https://api.githubcopilot.com/mcp/"
     },
+    "linear": {
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/mcp"
+      ],
+      "command": "npx"
+    },
     "memory": {
       "args": [
         "-y",
         "@modelcontextprotocol/server-memory"
       ],
-      "command": "npx"
+      "command": "npx",
+      "disabled_tools": []
+    },
+    "notionApi": {
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "command": "npx",
+      "env": {
+        "NOTION_TOKEN": "${NOTION_API_TOKEN}"
+      }
     },
     "sequentialthinking": {
       "args": [
-        "run",
-        "--rm",
-        "-i",
-        "mcp/sequentialthinking"
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
       ],
-      "command": "docker"
+      "command": "npx"
     },
     "supabase": {
       "args": [
