@@ -1,0 +1,179 @@
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "jandedobbeleer/oh-my-posh"
+tap "jstkdng/programs"
+tap "nikitabobko/tap"
+# Next generation open source RPC library and framework
+brew "grpc"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Columnar in-memory analytics layer designed to accelerate big data
+brew "apache-arrow"
+# GNU internationalization (i18n) and localization (l10n) library
+brew "gettext"
+# GNU compiler collection
+brew "gcc"
+# LLVM's OpenMP runtime library
+brew "libomp"
+# Computational Geometry Algorithms Library
+brew "cgal"
+# Versatile and fast Unicode/ASCII/ANSI graphics renderer
+brew "chafa"
+# Cross-platform make
+brew "cmake"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Convert text between DOS, UNIX, and Mac formats
+brew "dos2unix"
+# .NET Core
+brew "dotnet"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# High performance message passing library
+brew "open-mpi"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Package for scientific computing with Python
+brew "numpy"
+# C++ wrapper library around CGAL
+brew "sfcgal"
+# Geospatial Data Abstraction Library
+brew "gdal"
+# GitHub command-line tool
+brew "gh"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Linear Algebra PACKage
+brew "lapack"
+# Package manager for the Lua programming language
+brew "luarocks"
+# Scalable distributed version control system
+brew "mercurial"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Small build system for use with gyp or CMake
+brew "ninja"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Open source computer vision library
+brew "opencv"
+# Adds support for geographic objects to PostgreSQL
+brew "postgis"
+# Object-relational database system
+brew "postgresql@14", restart_service: :changed
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Spelling, grammar and style checking on LaTeX documents
+brew "textidote"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Internet file retriever
+brew "wget"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
+# Plain text note-taking assistant
+brew "zk"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Prompt theme engine for any shell
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
+# Drop in replacement for ueberzug written in C++
+brew "jstkdng/programs/ueberzugpp"
+# AeroSpace is an i3-like tiling window manager for macOS
+cask "aerospace"
+cask "font-cascadia-code"
+cask "font-cascadia-code-pl"
+cask "font-caskaydia-cove-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-hack-nerd-font"
+# PDF viewer designed for reading research papers and technical books
+cask "sioyek"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm@nightly"
+vscode "aaron-bond.better-comments"
+vscode "alexkrechik.cucumberautocomplete"
+vscode "antyos.openscad"
+vscode "arcticicestudio.nord-visual-studio-code"
+vscode "betterthantomorrow.calva"
+vscode "betterthantomorrow.calva-spritz"
+vscode "cucumberopen.cucumber-official"
+vscode "dbaeumer.vscode-eslint"
+vscode "docker.docker"
+vscode "donjayamanne.python-environment-manager"
+vscode "dsznajder.es7-react-js-snippets"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
+vscode "equinusocio.vsc-material-theme-icons"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-rename-tag"
+vscode "foxundermoon.shell-format"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "gruntfuggly.todo-tree"
+vscode "james-yu.latex-workshop"
+vscode "johnpapa.winteriscoming"
+vscode "kevinrose.vsc-python-indent"
+vscode "mathematic.vscode-latex"
+vscode "mechatroner.rainbow-csv"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-dotnettools.csdevkit"
+vscode "ms-dotnettools.csharp"
+vscode "ms-dotnettools.vscode-dotnet-runtime"
+vscode "ms-python.black-formatter"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.datawrangler"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.jupyter-renderers"
+vscode "ms-toolsai.tensorboard"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode-remote.remote-wsl"
+vscode "ms-vscode.cmake-tools"
+vscode "ms-vscode.cpptools"
+vscode "ms-vscode.cpptools-extension-pack"
+vscode "ms-vscode.cpptools-themes"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "mtxr.sqltools"
+vscode "pkief.material-icon-theme"
+vscode "qufiwefefwoyn.kanagawa"
+vscode "redhat.java"
+vscode "shakram02.bash-beautify"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "stylelint.vscode-stylelint"
+vscode "sumneko.lua"
+vscode "tomoki1207.pdf"
+vscode "twxs.cmake"
+vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "vscjava.vscode-gradle"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-maven"
+vscode "vscodevim.vim"
+vscode "wayou.vscode-todo-highlight"
+vscode "xabikos.javascriptsnippets"
+vscode "yinfei.luahelper"
