@@ -11,7 +11,7 @@ start-at-login = true
 # But the feature is very helpful.
 # Normalizations eliminate all sorts of weird tree configurations that don't make sense.
 # Give normalizations a chance and enable them back.
-enable-normalization-flatten-containers = false
+enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = false
 
 # Mouse follows focus when focused monitor changes
@@ -31,14 +31,16 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
     # Consider using 'join-with' command as a 'split' replacement if you want to enable
     # normalizations
-    cmd-alt-minus = 'split horizontal'
-    cmd-alt-v = 'split vertical'
+    cmd-alt-s = 'join-with left'
+    cmd-alt-f = 'join-with right'
+    cmd-alt-e = 'join-with up'
+    cmd-alt-d = 'join-with down'
 
-    cmd-alt-f = 'fullscreen'
+    cmd-alt-shift-f = 'fullscreen'
 
-    cmd-alt-s = 'layout v_accordion' # 'layout stacking' in i3
-    cmd-alt-w = 'layout h_accordion' # 'layout tabbed' in i3
-    cmd-alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+    cmd-alt-minus = 'layout v_accordion' # 'layout stacking' in i3
+    cmd-alt-slash = 'layout h_accordion' # 'layout tabbed' in i3
+    cmd-alt-shift-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
     cmd-alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 
