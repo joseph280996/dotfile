@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+set CONFIG_DOWNLOAD_LOCATION $(pwd)
+
 echo "Started Installing Configurations"
 
 echo "Started Detecting OS Type..."
@@ -14,7 +16,7 @@ case "Linux"
       if test ! -d "~/.config" 
         echo ".config folder does not exist!"
         echo "Started Linking .config Folder..."
-        ln "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
+        ln -s "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
         echo "Finished Linking .config Folder..."
       end
     else
@@ -22,7 +24,7 @@ case "Linux"
       if test ! -d "~/.config" 
         echo ".config folder does not exist!"
         echo "Started Linking .config Folder"
-        ln "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
+        ln -s "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
         echo "Finished Linking .config Folder"
       end
     end
@@ -31,7 +33,7 @@ case "Linux"
     if test ! -d "~/.config" 
       echo ".config folder does not exist!"
       echo "Started Linking .config Folder"
-      ln "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
+      ln -s "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
       echo "Finished Linking .config Folder"
     end
   else
@@ -39,7 +41,7 @@ case "Linux"
     if test ! -d "~/.config" 
       echo ".config folder does not exist!"
       echo "Started Linking .config Folder"
-      ln "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
+      ln -s "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
       echo "Finished Linking .config Folder"
     end
   end
@@ -48,7 +50,7 @@ case "Darwin"
   if test ! -d "~/.config" 
     echo ".config folder does not exist!"
     echo "Started Linking .config Folder"
-    ln "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config
+    ln -s "$CONFIG_DOWNLOAD_LOCATION/.config" ~/.config 
     echo "Finished Linking .config Folder"
   end
 
