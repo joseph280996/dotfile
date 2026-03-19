@@ -1,80 +1,72 @@
 {
-  "mcpServers": {
-    "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
-      "command": "uvx"
-    },
-    "filesystem": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "E:/config",
-        "C:/Users/josep/Code"
-      ],
-      "command": "npx"
-    },
-    "git": {
-      "args": [
-        "mcp-server-git"
-      ],
-      "command": "uvx"
-    },
-    "github": {
-      "disabled": false,
-      "headers": {
-        "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      },
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
-    "linear": {
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://mcp.linear.app/mcp"
-      ],
-      "command": "npx"
-    },
-    "memory": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ],
-      "command": "npx",
-      "disabled_tools": []
-    },
-    "notionApi": {
-      "args": [
-        "-y",
-        "@notionhq/notion-mcp-server"
-      ],
-      "command": "npx",
-      "env": {
-        "NOTION_TOKEN": "${NOTION_API_TOKEN}"
-      }
-    },
-    "sequentialthinking": {
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ],
-      "command": "npx"
-    },
-    "supabase": {
-      "args": [
-        "run",
-        "supabase-mcp-server"
-      ],
-      "command": "uv",
-      "env": {
-        "QUERY_API_KEY": "${QUERY_API_KEY}",
-        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}",
-        "SUPABASE_DB_PASSWORD": "${SUPABASE_DB_PASSWORD}",
-        "SUPABASE_PROJECT_REF": "${SUPABASE_PROJECT_REF}",
-        "SUPABASE_REGION": "${SUPABASE_REGION}",
-        "SUPABASE_SERVICE_ROLE_KEY": "${SUPABASE_SERVICE_ROLE_KEY}"
-      }
-    }
-  }
+	"mcpServers": {
+		"fetch": {
+			"args": ["mcp-server-fetch"],
+			"command": "uvx"
+		},
+		"filesystem": {
+			"args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/tpham4/config", "/Users/tpham4/Code"],
+			"command": "npx"
+		},
+		"git": {
+			"args": ["mcp-server-git"],
+			"command": "uvx"
+		},
+		"github": {
+			"disabled": false,
+			"headers": {
+				"Authorization": "Bearer ${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+			},
+			"url": "https://api.githubcopilot.com/mcp/"
+		},
+		"supabase": {
+			"args": ["run", "supabase-mcp-server"],
+			"command": "uv",
+			"env": {
+				"QUERY_API_KEY": "${env:QUERY_API_KEY}",
+				"SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}",
+				"SUPABASE_DB_PASSWORD": "${env:SUPABASE_DB_PASSWORD}",
+				"SUPABASE_PROJECT_REF": "${env:SUPABASE_PROJECT_REF}",
+				"SUPABASE_REGION": "${env:SUPABASE_REGION}",
+				"SUPABASE_SERVICE_ROLE_KEY": "${env:SUPABASE_SERVICE_ROLE_KEY}"
+			}
+		},
+		"mcp-atlassian": {
+			"args": ["mcp-atlassian"],
+			"command": "uvx",
+			"disabled": false,
+			"env": {
+				"JIRA_API_TOKEN": "${env:ATLASSIAN_JIRA_API_KEY}",
+				"JIRA_URL": "${env:ATLASSIAN_JIRA_URL}",
+				"JIRA_USERNAME": "${env:ATLASSIAN_USERNAME}",
+				"CONFLUENCE_API_TOKEN": "${env:ATLASSIAN_CONFLUENCE_API_KEY}",
+				"CONFLUENCE_URL": "${env:ATLASSIAN_CONFLUENCE_URL}",
+				"CONFLUENCE_USERNAME": "${env:ATLASSIAN_USERNAME}"
+			}
+		},
+		"linear": {
+			"args": ["-y", "mcp-remote", "https://mcp.linear.app/mcp"],
+			"command": "npx"
+		},
+		"notionApi": {
+			"args": ["-y", "@notionhq/notion-mcp-server"],
+			"command": "npx",
+			"env": {
+				"NOTION_TOKEN": "${env:NOTION_API_TOKEN}"
+			}
+		},
+		"memory": {
+			"args": ["-y", "@modelcontextprotocol/server-memory"],
+			"command": "npx",
+			"disabled_tools": []
+		},
+		"playwright": {
+			"args": ["@playwright/mcp@latest"],
+			"command": "npx"
+		},
+		"sequentialthinking": {
+			"args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+			"command": "npx"
+		}
+	}
 }
