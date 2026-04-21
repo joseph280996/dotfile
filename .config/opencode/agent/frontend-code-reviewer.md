@@ -171,6 +171,8 @@ Coverage and quality of tests in the diff. Flag missing tests. Reference lcov da
 ## 🔒 Security
 Dedicated section for security observations, even if minor.
 
+5. Conduct manual exploratory test
+
 # Behavioral Guidelines
 
 - **Focus exclusively on the diff**: Do not comment on pre-existing code unless directly relevant to a problem in the new code.
