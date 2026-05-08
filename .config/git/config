@@ -10,10 +10,11 @@
 [alias]
   nah = "!f(){ git reset --hard; git clean -df; if [ -d ".git/rebase-apply" ] || [ -d ".git/rebase-merge" ]; then git rebase --abort; fi; }; f"
   p = pull
-    co = checkout
-    com = checkout master
+  co = checkout
 	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
-	s = status
+	st = status
+	sw = switch
+  swm = switch master
 	puo = push origin HEAD -u
 	puf = push --force-with-lease
 	aa = add -A
@@ -23,12 +24,10 @@
 	rs = reset --soft
 	alias = "!f() { git config --global alias.$1 \"$2\"; }; f"
 	ustash = stash --include-untracked
-	ds = diff --full-index --staged
-	dm = diff --full-index  master...HEAD
-  ca = commit -a
   ls = log --oneline --graph
 	stashp = stash pop
 	stashd = stash drop
+	nbf = "!f() { git switch \"$1\" && git pull && git switch -c \"$2\"; }; f"
 
 [safe]
 	directory = D:/

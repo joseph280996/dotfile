@@ -1,23 +1,38 @@
 {
 	"$schema": "https://opencode.ai/config.json",
 	"model": "github-copilot/claude-sonnet-4.6",
-	"plugin": ["@plannotator/opencode@latest", "@tarquinen/opencode-dcp@latest", "superpowers@git+https://github.com/obra/superpowers.git"],
+	"plugin": ["@zhafron/opencode-kiro-auth", "@plannotator/opencode@latest", "@tarquinen/opencode-dcp@latest", "superpowers@git+https://github.com/obra/superpowers.git"],
+	"instructions": [".github/instructions/*.md"],
 	"mcp": {
-		"git": {
+		"ag-mcp": {
 			"type": "local",
-			"command": ["uvx", "mcp-server-git"]
+			"command": ["npx", "ag-mcp"]
 		},
 		"mcp-atlassian": {
 			"type": "local",
-			"command": ["uvx", "mcp-atlassian"],
-			"enabled": true,
+			"command": [
+				"docker",
+				"run",
+				"-i",
+				"--rm",
+				"-e",
+				"CONFLUENCE_URL",
+				"-e",
+				"CONFLUENCE_PERSONAL_TOKEN",
+				"-e",
+				"JIRA_URL",
+				"-e",
+				"JIRA_API_TOKEN",
+				"-e",
+				"JIRA_USERNAME",
+				"ghcr.io/sooperset/mcp-atlassian:latest"
+			],
 			"environment": {
-				"CONFLUENCE_API_TOKEN": "{env:ATLASSIAN_CONFLUENCE_API_KEY}",
 				"CONFLUENCE_URL": "{env:ATLASSIAN_CONFLUENCE_URL}",
-				"CONFLUENCE_USERNAME": "{env:ATLASSIAN_USERNAME}",
-				"JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
+				"CONFLUENCE_PERSONAL_TOKEN": "{env:ATLASSIAN_CONFLUENCE_API_KEY}",
 				"JIRA_URL": "{env:ATLASSIAN_JIRA_URL}",
-				"JIRA_USERNAME": "{env:ATLASSIAN_USERNAME}"
+				"JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
+        "JIRA_USERNAME": "tung.pham@sscinc.com"
 			}
 		},
 		"memory": {
@@ -31,6 +46,26 @@
 		"sequentialthinking": {
 			"type": "local",
 			"command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
+		},
+		"jenkins": {
+			"type": "local",
+			"command": ["npx", "jenkins-mcp", "--jenkins-url", "$JENKINS_URL", "--jenkins-username", "tpham4", "--jenkins-password", "$JENKINS_API_KEY"],
+			"environment": {
+				"JENKINS_API_KEY": "{env:JENKINS_API_KEY}",
+				"JENKINS_URl": "{env:JENKINS_URl}"
+			}
+		}
+	},
+	"agent": {
+		"plan": {
+			"model": "github-copilot/claude-opus-4.6",
+			"permissions": {
+				"edit": {
+					"*": "ask",
+					"*.csv": "allow",
+					"*.md": "allow"
+				}
+			}
 		}
 	}
 }
