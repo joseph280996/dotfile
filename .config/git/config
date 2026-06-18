@@ -15,6 +15,7 @@
 	st = status
 	sw = switch
   swm = switch master
+	swn = switch -c
 	puo = push origin HEAD -u
 	puf = push --force-with-lease
 	aa = add -A

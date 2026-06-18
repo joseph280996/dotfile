@@ -1,71 +1,118 @@
 {
-	"$schema": "https://opencode.ai/config.json",
-	"model": "github-copilot/claude-sonnet-4.6",
-	"plugin": ["@zhafron/opencode-kiro-auth", "@plannotator/opencode@latest", "@tarquinen/opencode-dcp@latest", "superpowers@git+https://github.com/obra/superpowers.git"],
-	"instructions": [".github/instructions/*.md"],
-	"mcp": {
-		"ag-mcp": {
-			"type": "local",
-			"command": ["npx", "ag-mcp"]
-		},
-		"mcp-atlassian": {
-			"type": "local",
-			"command": [
-				"docker",
-				"run",
-				"-i",
-				"--rm",
-				"-e",
-				"CONFLUENCE_URL",
-				"-e",
-				"CONFLUENCE_PERSONAL_TOKEN",
-				"-e",
-				"JIRA_URL",
-				"-e",
-				"JIRA_API_TOKEN",
-				"-e",
-				"JIRA_USERNAME",
-				"ghcr.io/sooperset/mcp-atlassian:latest"
-			],
-			"environment": {
-				"CONFLUENCE_URL": "{env:ATLASSIAN_CONFLUENCE_URL}",
-				"CONFLUENCE_PERSONAL_TOKEN": "{env:ATLASSIAN_CONFLUENCE_API_KEY}",
-				"JIRA_URL": "{env:ATLASSIAN_JIRA_URL}",
-				"JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "plan": {
+      "model": "github-copilot/claude-opus-4.6",
+      "permissions": {
+        "edit": {
+          "*": "ask",
+          "*.csv": "allow",
+          "*.md": "allow"
+        }
+      }
+    }
+  },
+  "instructions": [
+    ".github/instructions/*.md"
+  ],
+  "mcp": {
+    "ag-mcp": {
+      "command": [
+        "npx",
+        "ag-mcp"
+      ],
+      "type": "local"
+    },
+    "jenkins": {
+      "command": [
+        "npx",
+        "jenkins-mcp",
+        "--jenkins-url",
+        "$JENKINS_URL",
+        "--jenkins-username",
+        "tpham4",
+        "--jenkins-password",
+        "$JENKINS_API_KEY"
+      ],
+      "environment": {
+        "JENKINS_API_KEY": "{env:JENKINS_API_KEY}",
+        "JENKINS_URl": "{env:JENKINS_URl}"
+      },
+      "type": "local"
+    },
+    "lean-ctx": {
+      "command": [
+        "/opt/homebrew/bin/lean-ctx"
+      ],
+      "enabled": true,
+      "environment": {
+        "LEAN_CTX_DATA_DIR": "/Users/tpham4/.config/lean-ctx"
+      },
+      "type": "local"
+    },
+    "mcp-atlassian": {
+      "command": [
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "CONFLUENCE_URL",
+        "-e",
+        "CONFLUENCE_PERSONAL_TOKEN",
+        "-e",
+        "JIRA_URL",
+        "-e",
+        "JIRA_API_TOKEN",
+        "-e",
+        "JIRA_USERNAME",
+        "ghcr.io/sooperset/mcp-atlassian:latest"
+      ],
+      "environment": {
+        "CONFLUENCE_PERSONAL_TOKEN": "{env:ATLASSIAN_CONFLUENCE_API_KEY}",
+        "CONFLUENCE_URL": "{env:ATLASSIAN_CONFLUENCE_URL}",
+        "JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
+        "JIRA_URL": "{env:ATLASSIAN_JIRA_URL}",
         "JIRA_USERNAME": "tung.pham@sscinc.com"
-			}
-		},
-		"memory": {
-			"type": "local",
-			"command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
-		},
-		"playwright": {
-			"type": "local",
-			"command": ["npx", "@playwright/mcp@latest"]
-		},
-		"sequentialthinking": {
-			"type": "local",
-			"command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
-		},
-		"jenkins": {
-			"type": "local",
-			"command": ["npx", "jenkins-mcp", "--jenkins-url", "$JENKINS_URL", "--jenkins-username", "tpham4", "--jenkins-password", "$JENKINS_API_KEY"],
-			"environment": {
-				"JENKINS_API_KEY": "{env:JENKINS_API_KEY}",
-				"JENKINS_URl": "{env:JENKINS_URl}"
-			}
-		}
-	},
-	"agent": {
-		"plan": {
-			"model": "github-copilot/claude-opus-4.6",
-			"permissions": {
-				"edit": {
-					"*": "ask",
-					"*.csv": "allow",
-					"*.md": "allow"
-				}
-			}
-		}
-	}
+      },
+      "type": "local"
+    },
+    "memory": {
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "type": "local"
+    },
+    "playwright": {
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "type": "local"
+    },
+    "sequentialthinking": {
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "type": "local"
+    }
+  },
+  "model": "github-copilot/claude-sonnet-4.6",
+  "plugin": [
+    "@plannotator/opencode@latest",
+    "@tarquinen/opencode-dcp@latest",
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "provider": {
+    "amazon-bedrock": {
+      "options": {
+        "profile": "default",
+        "region": "us-east-1"
+      }
+    }
+  }
 }
