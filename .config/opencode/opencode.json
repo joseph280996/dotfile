@@ -2,8 +2,8 @@
 	"$schema": "https://opencode.ai/config.json",
 	"agent": {
 		"plan": {
-			"model": "SSC/claude-opus-4.8",
-			"permissions": {
+			"model": "SSC/us.anthropic.claude-opus-5",
+			"permission": {
 				"edit": {
 					"*": "ask",
 					"*.csv": "allow",
@@ -12,7 +12,7 @@
 			}
 		}
 	},
-	"instructions": [".github/instructions/*.md"],
+	"instructions": [".github/instructions/*.md", "/Users/tpham4/Code/Personal/ECC/rules/common/*.md"],
 	"mcp": {
 		"ag-mcp": {
 			"command": ["npx", "ag-mcp"],
@@ -22,7 +22,7 @@
 			"command": ["npx", "jenkins-mcp", "--jenkins-url", "$JENKINS_URL", "--jenkins-username", "tpham4", "--jenkins-password", "$JENKINS_API_KEY"],
 			"environment": {
 				"JENKINS_API_KEY": "{env:JENKINS_API_KEY}",
-				"JENKINS_URl": "{env:JENKINS_URl}"
+				"JENKINS_URL": "{env:JENKINS_URL}"
 			},
 			"type": "local"
 		},
@@ -56,15 +56,24 @@
 			"type": "local"
 		}
 	},
-	"model": "SSC/claude-sonnet-5",
-	"plugin": ["@plannotator/opencode@latest", "@tarquinen/opencode-dcp@latest", "superpowers@git+https://github.com/obra/superpowers.git"],
+	"model": "SSC/us.anthropic.claude-sonnet-5",
+	"plugin": [
+		"@plannotator/opencode@latest",
+		"@tarquinen/opencode-dcp@latest",
+		"superpowers@git+https://github.com/obra/superpowers.git",
+		"git+https://code.ssnc.dev/ai/claude-agent-orchestration-plugin.git"
+	],
 	"provider": {
-		"amazon-bedrock": {
+		"SSC": {
+			"npm": "@ai-sdk/anthropic",
+			"name": "SSNC Gateway",
 			"options": {
-				"profile": "default",
-				"region": "us-east-1"
+				"baseURL": "https://api-ai-us.ssnc-corp.cloud/claude"
+			},
+			"models": {
+				"us.anthropic.claude-opus-5": { "name": "Opus 5" },
+				"us.anthropic.claude-sonnet-5": { "name": "Sonnet 5" }
 			}
 		}
 	}
 }
-

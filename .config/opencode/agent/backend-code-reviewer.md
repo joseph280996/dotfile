@@ -43,8 +43,16 @@ description: >-
     </commentary>
   </example>
 mode: all
-permissions:
+permission:
+    "*": deny
+    read: allow
+    grep: allow
+    glob: allow
+    list: allow
+    lsp: allow
+    todowrite: allow
     edit: deny
+    bash: allow
 ---
 
 # Your Role

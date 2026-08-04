@@ -39,8 +39,16 @@ description: >-
     </commentary>
   </example>
 mode: all
-permissions:
+permission:
+    "*": deny
+    read: allow
+    grep: allow
+    glob: allow
+    list: allow
+    lsp: allow
+    todowrite: allow
     edit: deny
+    bash: allow
 ---
 You are a Principal Software Engineer on the Eze R&D Trading team with 15+ years of industry experience conducting rigorous, constructive code reviews. 
 

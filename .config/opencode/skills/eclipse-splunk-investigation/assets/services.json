@@ -1,0 +1,83 @@
+{
+  "default_index": "main",
+  "services": {
+    "publisher": {
+      "index": "main",
+      "sourcetype": "kube:container:publisher-service",
+      "description": "Publisher Service — publishes PositionLot data to downstream systems (Analytics, external feeds)",
+      "aliases": ["publisher-service", "pub"]
+    },
+    "peprocessor": {
+      "index": "main",
+      "sourcetype": "kube:container:peprocessor-service",
+      "description": "PEProcessor Service — handles position event processing (trades, corporate actions, adjustments)",
+      "aliases": ["pe-processor", "pep", "position-event-processor"]
+    },
+    "valuation": {
+      "index": "main",
+      "sourcetype": "kube:container:valuation-service",
+      "description": "Valuation Service — computes position market values and unrealized P&L",
+      "aliases": ["valuation-service", "val"]
+    },
+    "router": {
+      "index": "main",
+      "sourcetype": "kube:container:router-service",
+      "description": "Router Service — orchestrates batch job processing and inter-service message routing",
+      "aliases": ["router-service"]
+    },
+    "ims-eos": {
+      "index": "docker",
+      "sourcetype": "ims-eos",
+      "description": "IMS EOS application service (Rancher 1.6) — request processing and SQL orchestration",
+      "aliases": ["eos", "imseos"]
+    },
+    "ims-eos-postgres": {
+      "index": "docker",
+      "sourcetype": "ims-eos-postgres",
+      "description": "IMS EOS postgres sidecar service (Rancher 1.6)",
+      "aliases": ["eos-postgres", "imseos-postgres", "postgres-sidecar"]
+    },
+    "trading-hercules-engine": {
+      "index": "docker",
+      "sourcetype": "trading-hercules-engine",
+      "description": "Trading Hercules engine service (Rancher 1.6) — core order processing engine",
+      "aliases": ["hercules-engine", "hercules"]
+    },
+    "trading-hercules-api": {
+      "index": "docker",
+      "sourcetype": "trading-hercules-api",
+      "description": "Trading Hercules API service (Rancher 1.6) — HTTP API layer for the Hercules trading engine",
+      "aliases": ["hercules-api"]
+    },
+    "trading-hercules-lb": {
+      "index": "docker",
+      "sourcetype": "trading-hercules-lb",
+      "description": "Trading Hercules load balancer (Rancher 1.6)",
+      "aliases": ["hercules-lb"]
+    },
+    "trading-hercules-redis": {
+      "index": "docker",
+      "sourcetype": "trading-hercules-redis",
+      "description": "Trading Hercules Redis sidecar (Rancher 1.6)",
+      "aliases": ["hercules-redis"]
+    },
+    "trading-ems-connector": {
+      "index": "docker",
+      "sourcetype": "trading-ems-connector",
+      "description": "Eclipse-side EMS connector (Rancher 1.6) — bridges Eclipse to the EMS via FIX; query this first for Eclipse ↔ EMS integration issues",
+      "aliases": ["ems-connector"]
+    },
+    "trading-flash": {
+      "index": "docker",
+      "sourcetype": "trading-flash",
+      "description": "Trading Flash service (Rancher 1.6) — middle tier in the inbound execution message flow: EMS → ems-connector → flash → hercules. OrderMessage Processor.",
+      "aliases": ["flash"]
+    },
+    "trading-flash-redis": {
+      "index": "docker",
+      "sourcetype": "trading-flash-redis",
+      "description": "Trading Flash Redis sidecar (Rancher 1.6)",
+      "aliases": ["flash-redis"]
+    }
+  }
+}

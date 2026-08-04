@@ -30,7 +30,7 @@ description: >-
   </example>
 
 mode: all
-permissions:
+permission:
   edit: deny
 ---
 

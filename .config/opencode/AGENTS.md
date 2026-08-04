@@ -45,6 +45,19 @@ If a command fails with a quota error, inform the user and suggest `npx ctx7@lat
 5. **Verify:** `ctx_read(path, "diff")` + `ctx_shell("test command")`
 6. **Record:** `ctx_knowledge(action="remember", content="...")` for non-obvious findings
 
+## Proactive (use without being asked)
+- `ctx_overview(task)` — at session start for orientation
+- `ctx_compress` — when context grows large (at phase boundaries)
+- `ctx_knowledge(action="wakeup")` — at session start to surface prior findings
+
+## Compression Bypass (only when compressed output hides needed detail)
+`ctx_read(path, "lines:N-M")` → `ctx_read(path, "full")` → `ctx_shell(cmd, raw=true)`
+Return to compressed defaults after one expanded retrieval.
+
+## Risk Gate (before high-impact edits)
+Before editing exported symbols, auth, DB schemas, or 3+ files: run `ctx_impact(action="analyze")`
+and `ctx_callgraph(action="callers")` to confirm blast radius.
+
 ## Session
 - **Start:** `ctx_session(action="status")` + `ctx_knowledge(action="wakeup")`
 - **End:** `ctx_session(action="decision", content="what was done + next steps")`
@@ -52,3 +65,60 @@ If a command fails with a quota error, inform the user and suggest `npx ctx7@lat
 
 NEVER use native Read/Grep/Shell when ctx_* equivalents are available.
 <!-- /lean-ctx -->
+
+# Advisor available
+
+A stronger advisor model is available through the `advisor` subagent. Consult it
+by dispatching that subagent at these decision points:
+
+- **Before committing to an approach** on a non-trivial, multi-step task.
+- **When an error recurs** — if the same failure appears two or more times.
+- **Before declaring a task done** — for an independent check that the goal is
+  genuinely met.
+
+The advisor cannot use write or edit tools and cannot dispatch subagents; its
+shell access is for inspection only (`git status`, `git diff`, `grep`) and is
+constrained by its prompt rather than enforced. It verifies claims against the
+live workspace rather than trusting your account of it. Give it enough context to
+work from: the pending decision, the relevant file paths, and what you have
+already tried.
+
+The advisor is a **background mechanism**, not a user-facing feature. When a
+consult is warranted, just do it (dispatch the subagent) — do **not** ask the
+user for permission to consult, and do **not** list "consult the advisor" as an
+option in a menu of next steps. The user never needs to decide whether you use
+it; that is your judgment. The user can, of course, still request one explicitly
+by mentioning `@advisor`.
+
+Do not consult on trivial, single-step requests. Apply the advisor's guidance,
+but do not silently drop a point you disagree with. When you disagree with any
+advisor point, **re-engage the advisor once** rather than just overriding it:
+
+- **If you can verify the advisor is wrong** (it read the wrong file, the code or
+  a failing step contradicts it), hand that **evidence** back to the advisor and
+  let it reconsider — don't just move on.
+- **If it is a judgment call** you cannot settle with evidence, send your
+  reasoning back and get the advisor's response.
+
+Limit this to **one re-engagement round** (do not loop indefinitely). After that
+round, for any point where you and the advisor still do not agree, **escalate
+that specific point to the user** with both positions — this is a rare fallback,
+not the norm; most disagreements resolve in the one round.
+
+After consulting, **re-issue one consolidated, human-readable answer** — do not
+leave a short reply *to the advisor* as your last message. The user often has not
+seen the advisor's output and may not have re-read your pre-consult answer, so a
+terse "the advisor flagged X; point A is valid, point B I disagree with" reads as
+meta-commentary, not an answer. Instead, fold the points you accept back into a
+single updated response that stands on its own, note any corrections inline (e.g.
+"corrected: the settlement date defaults to the trade date, not unset"), and only
+briefly mention where you disagreed with the advisor and why. The final message
+should be the complete, current answer to the user's actual request.
+
+Keep "I need input from the user to proceed" separate from "here is optional
+follow-up work." If you must ask a blocking clarifying question, ask it on its
+own — do not bundle it under a menu of offered next steps.
+
+If `~/.local/share/opencode/advisor-disabled` exists, skip automatic consults
+entirely; the user has turned the mechanism off via `/advisor-toggle`. Explicit
+`@advisor` requests still work.
