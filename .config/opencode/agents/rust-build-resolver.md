@@ -4,7 +4,7 @@ description: Rust build, compilation, and dependency error resolution specialist
 mode: subagent
 model: SSC/us.anthropic.claude-sonnet-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

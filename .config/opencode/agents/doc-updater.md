@@ -4,7 +4,7 @@ description: Documentation and codemap specialist. Use PROACTIVELY for updating 
 mode: subagent
 model: SSC/us.anthropic.claude-opus-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

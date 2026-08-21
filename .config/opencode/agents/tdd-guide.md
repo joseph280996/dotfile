@@ -4,7 +4,7 @@ description: Test-Driven Development specialist enforcing write-tests-first meth
 mode: subagent
 model: SSC/us.anthropic.claude-sonnet-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

@@ -4,7 +4,7 @@ description: Operate autonomous agent loops, monitor progress, and intervene saf
 mode: subagent
 model: SSC/us.anthropic.claude-opus-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

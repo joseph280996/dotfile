@@ -4,7 +4,7 @@ description: Performance analysis and optimization specialist. Use PROACTIVELY f
 mode: subagent
 model: SSC/us.anthropic.claude-sonnet-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

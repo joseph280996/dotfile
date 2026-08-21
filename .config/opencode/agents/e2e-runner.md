@@ -4,7 +4,7 @@ description: End-to-end testing specialist using Vercel Agent Browser (preferred
 mode: subagent
 model: SSC/us.anthropic.claude-sonnet-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 

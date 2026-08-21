@@ -4,7 +4,7 @@ description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for
 mode: subagent
 model: SSC/us.anthropic.claude-sonnet-5
 permission:
-    edit: allow
+    edit: ask
     bash: allow
 ---
 
