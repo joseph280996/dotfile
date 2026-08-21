@@ -122,3 +122,26 @@ own — do not bundle it under a menu of offered next steps.
 If `~/.local/share/opencode/advisor-disabled` exists, skip automatic consults
 entirely; the user has turned the mechanism off via `/advisor-toggle`. Explicit
 `@advisor` requests still work.
+
+# Planning
+
+When in plan mode, before doing any exploration or writing a plan, load the
+`grilling` skill and run a grilling session to completion. Requirements get
+settled first; the plan gets written from settled requirements, not
+assumptions.
+
+Always run the session — do not skip it because the request looks simple.
+But let the grilling skill's own termination rule set the pace: the session
+ends when the frontier is empty. A one-line request produces a
+one-node design tree, so it settles in a single round; a complex request
+takes as many rounds as it takes. This is always-on, not always-multi-round.
+
+Facts are yours to find, not the user's to answer — per the grilling skill's
+own rule. When a frontier question needs something discoverable from the
+filesystem or tools, dispatch the **`explore`** subagent rather than asking
+the user. Name it explicitly: in plan mode the `general` subagent is denied,
+so `explore` is the only fact-finding subagent actually available.
+
+When the frontier is empty and the user has confirmed shared understanding,
+write the plan and submit it for review. This section applies to plan mode
+only — do not carry the grilling protocol into `build` or into subagents.
