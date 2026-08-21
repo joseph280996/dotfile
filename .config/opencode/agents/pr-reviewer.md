@@ -20,9 +20,6 @@ permission:
     edit:
         "*": deny
         ".opencode/reviews/**": allow
-    write:
-        "*": deny
-        ".opencode/reviews/**": allow
     external_directory:
         "*": deny
         "/Users/tpham4/.config/opencode/skills/code-review/*": allow
