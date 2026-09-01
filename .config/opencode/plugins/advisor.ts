@@ -1,7 +1,8 @@
 import type { Plugin } from "@opencode-ai/plugin"
-import { existsSync } from "node:fs"
 import { homedir } from "node:os"
 import { join } from "node:path"
+import { hookEnabled, scopedLog, sentinelExists } from "./lib/hooks.ts"
+import { pluginSubtaskMarker, readSession, subtaskMarker } from "./lib/session.ts"
 
 /**
  * Automatic advisor consults on turn completion.
@@ -10,11 +11,31 @@ import { join } from "node:path"
  * per completed turn — and dispatches the `advisor` subagent via a `subtask`
  * part. That costs one extra main-agent turn, equivalent to Claude's Stop hook.
  *
- * Disable with `/advisor-toggle` (sentinel file below).
+ * Two independent kill switches, with different reach:
+ * - `/advisor-toggle` writes the sentinel file below. Checked per event, so it
+ *   takes effect immediately, without restarting opencode.
+ * - `OPENCODE_DISABLED_HOOKS=advisor:consult` is process-scoped (parsed once at
+ *   module load), so it needs a restart. Suited to CI or a one-off invocation.
  */
 
-const SENTINEL = join(homedir(), ".local", "share", "opencode", "advisor-disabled")
+const HOOK_ID = "advisor:consult"
 const ADVISOR_AGENT = "advisor"
+
+/**
+ * Sentinel path. Deliberately under `~/.local/share/`, NOT the opencode config
+ * dir, which is a git repo where a sentinel would show up as a dirty file on
+ * every status check.
+ */
+const SENTINEL = join(homedir(), ".local", "share", "opencode", "advisor-disabled")
+
+/**
+ * Description on the dispatched subtask part.
+ *
+ * Load-bearing, not cosmetic: it is the discriminator that distinguishes this
+ * plugin's consults from ones the main agent dispatches itself. Changing it
+ * resets the effective consult count for in-flight sessions.
+ */
+const CONSULT_DESCRIPTION = "Second opinion on the pending decision"
 
 /**
  * Tool calls in a turn below which a consult isn't worth the round-trip.
@@ -38,15 +59,36 @@ const MAX_CONSULTS = 3
  * something. Consulting then is pointless: the work is in-flight pending user
  * input. The original validated both heuristics (trailing question mark, and
  * these phrases) against four real over-fires; each caught all four
- * independently. Applied to the last 200 characters only, so a question early
- * in a long answer doesn't suppress a legitimate consult.
+ * independently.
  */
 const HANDOFF_PHRASES =
   /want me to|let me know|do you want|should i|shall i|would you like|paste back|once you|tell me|your (turn|call)|which .* or /i
 
+/**
+ * Grilling rounds end on a declarative recommendation, so the handoff
+ * heuristics below never see a question — the `❓` markers sit thousands of
+ * characters above the tail, and each one is answered by a `➡️` statement.
+ *
+ * Requires BOTH markers. `❓` alone is not a grilling signal: resiliency-review
+ * uses it as a row-level confidence value ("❓ Unknown / needs verification") on
+ * reports that legitimately complete work and should still be consulted on.
+ * `➡️` is unique to grilling across every installed skill directory.
+ */
+const GRILL_RECOMMENDATION = "➡️"
+const GRILL_QUESTION = /❓|\*\*Q\d+\*\*/
+
+function isGrillingRound(text: string): boolean {
+  return text.includes(GRILL_RECOMMENDATION) && GRILL_QUESTION.test(text)
+}
+
 function isHandoff(text: string): boolean {
-  const tail = text.slice(-200)
-  return tail.includes("?") || HANDOFF_PHRASES.test(tail)
+  // Whole-text scan: a question early in a long answer is still a question.
+  // A tail-only window is what let grilling rounds through — each one closes
+  // on a declarative `➡️` recommendation, never a `?`.
+  if (text.includes("?")) return true
+  // Phrases stay tail-scoped — they are weak signals that only carry
+  // handoff meaning when they are how the message ends.
+  return HANDOFF_PHRASES.test(text.slice(-200))
 }
 
 const PROMPT_HEADER = [
@@ -61,15 +103,33 @@ const PROMPT_HEADER = [
 ].join("\n")
 
 export const AdvisorPlugin: Plugin = async ({ client }) => {
-  /**
-   * Sessions already consulted, keyed to the message count at consult time.
-   * Anchor-and-count: a bare boolean would consult once per session ever, and a
-   * naive counter would re-fire on every subsequent idle.
-   */
-  const consultedAt = new Map<string, number>()
+  const log = scopedLog(HOOK_ID)
 
-  /** Consults dispatched per session, capped by MAX_CONSULTS. */
-  const consultCount = new Map<string, number>()
+  // Process-scoped switch, checked once. The sentinel below is the
+  // live-toggleable one.
+  const enabled = hookEnabled(HOOK_ID)
+  if (!enabled) log("info", "disabled via OPENCODE_DISABLED_HOOKS")
+
+  /**
+   * Message count at the last dispatch, per session. Serves TWO purposes, and
+   * both are why it cannot be replaced by state derived from history:
+   *
+   * 1. **Dedupe.** `session.idle` can land repeatedly without new work.
+   *
+   * 2. **In-flight mutex.** `client.session.prompt` blocks until the dispatched
+   *    advisor turn *finishes*, and that turn ending publishes another
+   *    `session.idle`. Plugin events are dispatched fire-and-forget (the
+   *    handler's promise is never awaited), so this handler reliably overlaps
+   *    with itself. Recording synchronously before the first `await` is what
+   *    stops a second invocation from dispatching a duplicate consult.
+   *
+   * Deliberately never released, not even on failure: a released guard plus a
+   * dispatch that failed before writing its subtask part would leave the derived
+   * counter unchanged and still above threshold, re-dispatching immediately and
+   * indefinitely. Failing closed for a given message count is the safer
+   * asymmetry — a dispatch failure costs one skipped consult, not a hot loop.
+   */
+  const dispatchAnchor = new Map<string, number>()
 
   return {
     event: async ({ event }) => {
@@ -77,65 +137,64 @@ export const AdvisorPlugin: Plugin = async ({ client }) => {
       // throw here becomes an unhandled rejection. Everything stays inside
       // try/catch.
       try {
+        if (!enabled) return
         if (event.type !== "session.idle") return
-        if (existsSync(SENTINEL)) return
+
+        // Checked per event so `/advisor-toggle` applies without a restart.
+        if (sentinelExists(SENTINEL)) return
 
         const sessionID = event.properties.sessionID
         if (!sessionID) return
 
-        const session = await client.session.get({ path: { id: sessionID } })
-        const info = session.data
-        if (!info) return
+        // Rejects subagent sessions before fetching messages — the advisor's own
+        // idle would otherwise re-trigger the advisor.
+        const result = await readSession(client, sessionID)
+        if (!result.ok) return
+        const facts = result.facts
 
-        // Root sessions only. The advisor's own idle would otherwise re-trigger
-        // the advisor.
-        if (info.parentID) return
-
-        if ((consultCount.get(sessionID) ?? 0) >= MAX_CONSULTS) return
-
-        const messages = await client.session.messages({ path: { id: sessionID } })
-        const list = messages.data ?? []
-        if (!list.length) return
-
-        // Count tool calls since the last advisor dispatch, and capture the
-        // final assistant text for the handoff check.
-        let toolCalls = 0
-        let lastAssistantText = ""
-        for (const message of list) {
-          const parts = message?.parts ?? []
-          for (const part of parts) {
-            if (part.type === "subtask" && part.agent === ADVISOR_AGENT) {
-              toolCalls = 0
-            } else if (part.type === "tool") {
-              toolCalls++
-            } else if (part.type === "text" && message.info?.role === "assistant" && part.text) {
-              lastAssistantText = part.text
-            }
-          }
+        // An aborted turn is not a completion, even if it did enough work.
+        // Three independent checks, because ESC has three distinct code paths
+        // in opencode's session runtime that each race, or skip, the message-
+        // level `error` field differently — see the doc comments on each fact
+        // in lib/session.ts for the exact opencode source lines.
+        if (facts.wasAborted) return
+        if (facts.turnIncomplete) {
+          log("info", "skipped: turn incomplete (idle raced the abort persist)")
+          return
+        }
+        if (facts.subtaskCancelled) {
+          log("info", "skipped: subtask cancelled mid-run")
+          return
         }
 
-        // `session.idle` also fires on ESC/abort. An aborted turn that already
-        // made enough tool calls would otherwise trigger a consult on work the
-        // user explicitly interrupted — and because the abort writes an error
-        // part, the message count grows and the same-count guard below fails
-        // open. Check the discriminant directly.
-        const last = list[list.length - 1]
-        if (last?.info?.role === "assistant" && last.info.error?.name === "MessageAbortedError") return
+        // Count only this plugin's own dispatches. A `subtask` part is written
+        // for every subagent invocation, including manual `@advisor` consults,
+        // and counting those would exhaust the budget before the plugin fired.
+        if (facts.countMatching(pluginSubtaskMarker(ADVISOR_AGENT, CONSULT_DESCRIPTION)) >= MAX_CONSULTS) {
+          return
+        }
 
-        // Nothing substantive since the last consult (or since session start).
+        // Work done since the last consult by anyone. Resetting on a manual
+        // consult is intended: advice was just given, so the counter should
+        // start over regardless of who asked for it.
+        const toolCalls = facts.toolCallsSince(subtaskMarker(ADVISOR_AGENT))
         if (toolCalls < MIN_TOOL_CALLS) return
 
         // The agent is pausing to ask the user something, not declaring done.
-        if (lastAssistantText && isHandoff(lastAssistantText)) return
+        if (facts.lastAssistantText) {
+          if (isGrillingRound(facts.lastAssistantText)) {
+            log("info", "skipped: grilling round awaiting user answers")
+            return
+          }
+          if (isHandoff(facts.lastAssistantText)) return
+        }
 
-        // Don't re-consult at the same message count — `session.idle` can land
-        // repeatedly without new work.
-        const seen = consultedAt.get(sessionID)
-        if (seen !== undefined && seen >= list.length) return
+        // Don't re-consult at the same message count.
+        const seen = dispatchAnchor.get(sessionID)
+        if (seen !== undefined && seen >= facts.messageCount) return
 
-        // Record BEFORE dispatching: the call is async and idle can re-enter.
-        consultedAt.set(sessionID, list.length)
-        consultCount.set(sessionID, (consultCount.get(sessionID) ?? 0) + 1)
+        // Record BEFORE dispatching — see the `dispatchAnchor` note above.
+        dispatchAnchor.set(sessionID, facts.messageCount)
 
         // A `subtask` part carries only prompt/description/agent — the child
         // session inherits no conversation history, so the advisor would
@@ -156,7 +215,7 @@ export const AdvisorPlugin: Plugin = async ({ client }) => {
               {
                 type: "subtask",
                 agent: ADVISOR_AGENT,
-                description: "Second opinion on the pending decision",
+                description: CONSULT_DESCRIPTION,
                 prompt,
               },
             ],
@@ -166,7 +225,7 @@ export const AdvisorPlugin: Plugin = async ({ client }) => {
         // returning early from the run loop means the subtask part is written to
         // history but never executed.
       } catch (err) {
-        console.warn(`[advisor] consult skipped: ${err instanceof Error ? err.message : String(err)}`)
+        log("warn", `consult skipped: ${err instanceof Error ? err.message : String(err)}`)
       }
     },
   }

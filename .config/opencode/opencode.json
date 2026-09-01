@@ -1,6 +1,44 @@
 {
 	"$schema": "https://opencode.ai/config.json",
+  "references":  {
+    "service-docs": {
+      "path": "./docs",
+      "description": "This holds all the documentation of the current service and gives information for reference on anything related to the current service."
+    },
+    "knowledge-base": {
+      "path": "~/Documents/knowledge-base",
+      "description": "Use for general knowledge on how each service and the works that was done. Should use this folder for writing plans."
+    },
+    "nvim-config": {
+      "path": "~/.config/nvim",
+      "description": "Use for any neovim configuration that needs to be changed while working"
+    },
+    "plannotator": {
+      "path": "~/.plannotator/plans",
+      "description": "This is where all the plans that was submitted to Plannotator lives. Use this to look at any plans created given the context of what we're currently doing."
+    },
+    "opencode-skills": {
+      "path": "~/.config/opencode/skills",
+      "description": "This is where all of the agent skills live. Use it for when user request a new skill or a modification to an existing skill."
+    },
+    "global-skills": {
+      "path": "~/.agent/skills",
+      "description": "This is where all of the global agent skills live. Use it for when user request a new skill or a modification to an existing skill."
+    },
+    "opencode-agents": {
+      "path": "~/.config/opencode/agents",
+      "description": "This is where all of the global agent description live. Use it for when user request a new specialized agent or a modification to an existing one."
+    }
+  },
 	"agent": {
+		"build": {
+			"model": "SSC/deepseek-v4-flash-1m",
+			"permission": {
+				"edit": {
+					"*": "ask"
+				}
+			}
+		},
 		"plan": {
 			"model": "SSC/us.anthropic.claude-opus-5",
 			"permission": {
@@ -12,7 +50,7 @@
 			}
 		}
 	},
-	"instructions": [".github/instructions/*.md", "/Users/tpham4/Code/Personal/ECC/rules/common/*.md"],
+	"instructions": [".github/instructions/*.md", "~/.config/opencode/rules/*.md"],
 	"mcp": {
 		"ag-mcp": {
 			"command": ["npx", "ag-mcp"],
@@ -57,9 +95,11 @@
 		}
 	},
 	"model": "SSC/us.anthropic.claude-sonnet-5",
+	"small_model": "SSC/us.anthropic.claude-haiku-4-5-20251001-v1:0",
 	"plugin": [
+		"superpowers@git+https://github.com/obra/superpowers.git",
 		"@plannotator/opencode@latest",
-		"@tarquinen/opencode-dcp@latest",
+		"ecc-universal",
 		"superpowers@git+https://github.com/obra/superpowers.git",
 		"git+https://code.ssnc.dev/ai/claude-agent-orchestration-plugin.git"
 	],
@@ -71,8 +111,44 @@
 				"baseURL": "https://api-ai-us.ssnc-corp.cloud/claude"
 			},
 			"models": {
-				"us.anthropic.claude-opus-5": { "name": "Opus 5" },
-				"us.anthropic.claude-sonnet-5": { "name": "Sonnet 5" }
+				"us.anthropic.claude-opus-5-1m": {
+          "id": "us.anthropic.claude-opus-5",
+					"name": "Opus 5 (1M)",
+					"reasoning": true,
+					"limit": { "context": 1000000, "output": 64000 }
+				},
+				"us.anthropic.claude-opus-5": {
+					"name": "Opus 5"
+				},
+				"us.anthropic.claude-sonnet-5-1m": {
+          "id": "us.anthropic.claude-sonnet-5",
+					"name": "Sonnet 5 (1M)",
+					"limit": { "context": 1000000, "output": 64000 }
+				},
+				"us.anthropic.claude-sonnet-5": {
+					"name": "Sonnet 5"
+				},
+				"us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+					"name": "Haiku 4.5"
+				},
+				"us.anthropic.claude-haiku-4-5-20251001-v1:0-1m": {
+          "id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+					"name": "Haiku 4.5 (1M)",
+					"limit": { "context": 1000000, "output": 64000 }
+				},
+        "deepseek-v4-flash": {
+          "id": "deepseek-ai/DeepSeek-V4-Flash",
+          "name": "DeepSeek v4 Flash"
+        },
+        "deepseek-v4-flash-1m": {
+          "id": "deepseek-ai/DeepSeek-V4-Flash",
+          "name": "DeepSeek v4 Flash (1M)",
+					"limit": { "context": 1000000, "output": 64000 }
+        },
+        "google/gemma-4-31B-it": {
+          "name": "Gemma 4 (1M)",
+					"limit": { "context": 1000000, "output": 64000 }
+        }
 			}
 		}
 	}
