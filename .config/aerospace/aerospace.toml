@@ -12,10 +12,13 @@ start-at-login = true
 # Normalizations eliminate all sorts of weird tree configurations that don't make sense.
 # Give normalizations a chance and enable them back.
 enable-normalization-flatten-containers = true
-enable-normalization-opposite-orientation-for-nested-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Mouse follows focus when focused monitor changes
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'horizontal'
 
 [mode.main.binding]
     # i3 wraps focus by default
