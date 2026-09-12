@@ -1,6 +1,10 @@
 {
 	"$schema": "https://opencode.ai/config.json",
   "references":  {
+    "services-architecture": {
+      "path": "~/Code/Work/ARCH-eclipse-knowledgebase/",
+      "description": "This holds all the services' architecture documentation within Eclipse. Consult for any work or design regarding system architecture."
+    },
     "service-docs": {
       "path": "./docs",
       "description": "This holds all the documentation of the current service and gives information for reference on anything related to the current service."
@@ -32,7 +36,7 @@
   },
 	"agent": {
 		"build": {
-			"model": "SSC/deepseek-v4-flash-1m",
+			"model": "SSC/zai-org/GLM-5.3-Flash",
 			"permission": {
 				"edit": {
 					"*": "ask"
@@ -57,11 +61,7 @@
 			"type": "local"
 		},
 		"jenkins": {
-			"command": ["npx", "jenkins-mcp", "--jenkins-url", "$JENKINS_URL", "--jenkins-username", "tpham4", "--jenkins-password", "$JENKINS_API_KEY"],
-			"environment": {
-				"JENKINS_API_KEY": "{env:JENKINS_API_KEY}",
-				"JENKINS_URL": "{env:JENKINS_URL}"
-			},
+			"command": ["npx", "jenkins-mcp", "--jenkins-url", "{env:JENKINS_URL}", "--jenkins-username", "tpham4", "--jenkins-password", "{env:JENKINS_API_KEY}"],
 			"type": "local"
 		},
 		"lean-ctx": {
@@ -136,18 +136,13 @@
 					"name": "Haiku 4.5 (1M)",
 					"limit": { "context": 1000000, "output": 64000 }
 				},
-        "deepseek-v4-flash": {
-          "id": "deepseek-ai/DeepSeek-V4-Flash",
-          "name": "DeepSeek v4 Flash"
-        },
-        "deepseek-v4-flash-1m": {
-          "id": "deepseek-ai/DeepSeek-V4-Flash",
-          "name": "DeepSeek v4 Flash (1M)",
+        "zai-org/GLM-5.3-Flash": {
+          "name": "GLM-5.3 Flash",
 					"limit": { "context": 1000000, "output": 64000 }
         },
         "google/gemma-4-31B-it": {
-          "name": "Gemma 4 (1M)",
-					"limit": { "context": 1000000, "output": 64000 }
+          "name": "Gemma 4 (31B)",
+					"limit": { "context": 32000, "output": 32000 }
         }
 			}
 		}

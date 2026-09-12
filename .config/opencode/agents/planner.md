@@ -2,7 +2,7 @@
 name: planner
 description: Expert planning specialist for complex features and refactoring. Use PROACTIVELY when users request feature implementation, architectural changes, or complex refactoring. Automatically activated for planning tasks.
 mode: subagent
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/GLM-5.2-BT
 permission:
     "*": deny
     read: allow
