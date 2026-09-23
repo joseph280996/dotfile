@@ -2,7 +2,7 @@
 name: network-config-reviewer
 description: Reviews router and switch configurations for security, correctness, stale references, risky change-window commands, and missing operational guardrails.
 mode: subagent
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/us.anthropic.claude-opus-5-5
 permission:
     "*": deny
     read: allow

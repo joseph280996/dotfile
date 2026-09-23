@@ -2,7 +2,7 @@
 name: network-troubleshooter
 description: Diagnoses network connectivity, routing, DNS, interface, and policy symptoms with a read-only OSI-layer workflow and evidence-backed root cause summary.
 mode: subagent
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/us.anthropic.claude-opus-5-5
 permission:
     "*": deny
     read: allow

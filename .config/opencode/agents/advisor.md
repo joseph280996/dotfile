@@ -2,7 +2,7 @@
 name: advisor
 description: Senior advisor that reviews the current session and gives a stronger second opinion at decision points. Use before committing to an approach on a non-trivial task, when the same error recurs two or more times, or before declaring a task done.
 mode: subagent
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/us.anthropic.claude-opus-5-5
 permission:
     "*": deny
     read: allow

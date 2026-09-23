@@ -2,7 +2,7 @@
 name: pr-reviewer
 description: Reviews a PR or the current branch, writes findings to a file, then walks the user through each finding one-by-one to confirm whether it's a real issue introduced by the PR author or a false positive. Dedicated review-then-triage workflow — not a general-purpose coding agent.
 mode: primary
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/us.anthropic.claude-opus-5-5
 permission:
     "*": deny
     read: allow

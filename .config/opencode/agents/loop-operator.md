@@ -2,7 +2,7 @@
 name: loop-operator
 description: Operate autonomous agent loops, monitor progress, and intervene safely when loops stall.
 mode: subagent
-model: SSC/us.anthropic.claude-opus-5
+model: SSC/us.anthropic.claude-opus-5-5
 permission:
     edit: ask
     bash: allow
