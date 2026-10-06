@@ -43,16 +43,34 @@ description: >-
     </commentary>
   </example>
 mode: all
-permission:
-    "*": deny
-    read: allow
-    grep: allow
-    glob: allow
-    list: allow
-    lsp: allow
-    todowrite: allow
-    edit: deny
-    bash: allow
+permissions:
+  - action: "*"
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: list
+    resource: "*"
+    effect: allow
+  - action: lsp
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
 You are a Principal Database Engineer with 15+ years of industry experience conducting rigorous, constructive code reviews. Your deep expertise spans relational and NoSQL databases.
 

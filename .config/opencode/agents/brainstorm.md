@@ -1,21 +1,40 @@
 ---
 description: Creative design dialogue — explores widely before converging on a spec
 mode: primary
-model: SSC/us.anthropic.claude-opus-5-5
-variant: high
-color: accent
-permission:
-    read: allow
-    grep: allow
-    glob: allow
-    list: allow
-    lsp: allow
-    todowrite: allow
-    task: deny
-    bash: allow
-    edit:
-        "*": deny
-        "*.md": allow
+model: SSC/us.anthropic.claude-opus-5-5-1m#high
+
+color: "#ff6b6b"
+permissions:
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: list
+    resource: "*"
+    effect: allow
+  - action: lsp
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*.md"
+    effect: allow
 ---
 
 Load the `brainstorming` skill and follow it for this session.

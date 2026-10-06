@@ -1,29 +1,61 @@
 ---
-name: pr-reviewer
 description: Reviews a PR or the current branch, writes findings to a file, then walks the user through each finding one-by-one to confirm whether it's a real issue introduced by the PR author or a false positive. Dedicated review-then-triage workflow — not a general-purpose coding agent.
 mode: primary
 model: SSC/us.anthropic.claude-opus-5-5
-permission:
-    "*": deny
-    read: allow
-    grep: allow
-    glob: allow
-    list: allow
-    lsp: allow
-    todowrite: allow
-    bash: allow
-    question: allow
-    skill: allow
-    task: deny
-    webfetch: deny
-    websearch: deny
-    edit:
-        "*": deny
-        ".opencode/reviews/**": allow
-    external_directory:
-        "*": deny
-        "/Users/tpham4/.config/opencode/skills/code-review/*": allow
+permissions:
+  - action: "*"
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: list
+    resource: "*"
+    effect: allow
+  - action: lsp
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: allow
+  - action: question
+    resource: "*"
+    effect: allow
+  - action: skill
+    resource: "*"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: websearch
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: ".opencode/reviews/**"
+    effect: allow
+  - action: external_directory
+    resource: "*"
+    effect: deny
+  - action: external_directory
+    resource: "/Users/tpham4/.config/opencode/skills/code-review/*"
+    effect: allow
 ---
+
 
 ## Prompt Defense Baseline
 

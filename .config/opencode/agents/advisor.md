@@ -1,20 +1,40 @@
 ---
-name: advisor
 description: Senior advisor that reviews the current session and gives a stronger second opinion at decision points. Use before committing to an approach on a non-trivial task, when the same error recurs two or more times, or before declaring a task done.
 mode: subagent
 model: SSC/us.anthropic.claude-opus-5-5
-permission:
-    "*": deny
-    read: allow
-    grep: allow
-    glob: allow
-    list: allow
-    lsp: allow
-    todowrite: allow
-    edit: deny
-    task: deny
-    bash: allow
+permissions:
+  - action: "*"
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: list
+    resource: "*"
+    effect: allow
+  - action: lsp
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
+
 
 ## Prompt Defense Baseline
 

@@ -4,9 +4,11 @@ description: >
   Investigates production behavior of Eclipse services by querying Splunk logs. Use this
   skill when asked to investigate production issues, errors, slow performance, job failures,
   or unexpected behavior in any Eclipse service. Works for both registry-backed services
-  and arbitrary sourcetypes via --sourcetype or --raw-spl. Requires SPLUNK_HOST
-  and SPLUNK_USERNAME environment variables, and either SPLUNK_PASSWORD stored in
-  OS keyring or SPLUNK_TOKEN as an environment variable for authentication.
+  and arbitrary sourcetypes via --sourcetype or --raw-spl. Asks the user which environment
+  to target (prod or castle/dev) and resolves the host from SPLUNK_HOST_PROD or
+  SPLUNK_HOST_CASTLE. Requires SPLUNK_HOST, SPLUNK_USERNAME environment variables, and
+  either SPLUNK_PASSWORD stored in OS keyring or SPLUNK_TOKEN as an environment variable
+  for authentication.
 compatibility: >
   Requires Python 3.10+, the `requests` library, and the `keyring` library. Requires 
   network access to Splunk (default port 8089). Requires SPLUNK_HOST, SPLUNK_USERNAME 
@@ -21,9 +23,31 @@ This skill queries Splunk to investigate production behavior of Eclipse services
 
 ---
 
+## Environment Selection — Ask Before Any Query
+
+Splunk has two environments. **Determine which one to investigate before running any query** — never assume:
+
+1. If the user's request does not state an environment, ask first: "Which environment — **prod** or **castle** (dev)?"
+2. Export `SPLUNK_HOST` from the matching variable (the scripts read `SPLUNK_HOST`):
+
+```bash
+# prod
+export SPLUNK_HOST="${SPLUNK_HOST_PROD:-splunk-awsprod.ezesoft.net}"
+
+# castle (dev)
+export SPLUNK_HOST="${SPLUNK_HOST_CASTLE:-splunk-awsdev.ezesoft.net}"
+```
+
+- `SPLUNK_HOST_PROD` / `SPLUNK_HOST_CASTLE` live in your shell profile. If one is unset, the fallback hostname shown above applies.
+- A host the user provides directly still wins: pass it inline as `SPLUNK_HOST=<host> python3 scripts/...`.
+- Never mix environments within one investigation. If the user switches environments, re-export `SPLUNK_HOST` before further queries.
+
+---
+
 ## COMMON PITFALLS — Read This First
 
 **Quick checklist before writing any SPL:**
+0. Pick the environment (prod or castle) and export `SPLUNK_HOST` from it — see Environment Selection above
 1. Double-quote all dotted field names (e.g., `"k8s.pod.name"`)
 2. Keep time windows narrow (`-2h` not `-7d`) to avoid timeouts
 3. Search WARN + ERROR together for reliability incidents
@@ -312,7 +336,7 @@ For services not yet in the registry, use `--sourcetype <exact-type>` directly.
 
 If Splunk is unreachable or credentials are invalid, the scripts will return an error message. Handle these scenarios as follows:
 
-- **Connection refused / timeout**: Verify `SPLUNK_HOST` is correct and that you have network access to port 8089. Check VPN connectivity if applicable.
+- **Connection refused / timeout**: Verify the host variable for the chosen environment (`SPLUNK_HOST_PROD` or `SPLUNK_HOST_CASTLE`) is set and `SPLUNK_HOST` was exported from it, and that you have network access to port 8089. Check VPN connectivity if applicable.
 - **HTTP 401 Unauthorized**: Credentials are invalid. Re-run the setup script to update them, or verify your `SPLUNK_TOKEN` is current. If the script output includes an absolute `setup.py` path, give that exact path to the user instead of shortening it to `python3 scripts/setup.py`.
 - **Keyring entry not found**: `SPLUNK_PASSWORD` is missing from the OS keyring. The loader prints the active skill root and the absolute `setup.py` path programmatically. Surface those exact paths to the user instead of making them guess where the skill was loaded from.
 - **SSL errors**: The Splunk endpoint may require a specific CA bundle. Set `REQUESTS_CA_BUNDLE` if needed.
@@ -386,7 +410,9 @@ python3 -c "import keyring; keyring.set_password('eclipse-splunk-investigation',
 
 | Variable | Description | Recommended Source |
 |---|---|---|
-| `SPLUNK_HOST` | Splunk hostname, e.g. `splunk.internal` or `splunk.internal:8089`. `https://` prefix is stripped automatically. | `.env` file or shell profile |
+| `SPLUNK_HOST` | Splunk hostname, e.g. `splunk.internal` or `splunk.internal:8089`. `https://` prefix is stripped automatically. | Exported from `SPLUNK_HOST_PROD` or `SPLUNK_HOST_CASTLE` (see Environment Selection) |
+| `SPLUNK_HOST_PROD` | Splunk hostname for the prod environment, e.g. `splunk-awsprod.ezesoft.net` | Shell profile |
+| `SPLUNK_HOST_CASTLE` | Splunk hostname for the castle (dev) environment, e.g. `splunk-awsdev.ezesoft.net` | Shell profile |
 | `SPLUNK_USERNAME` | Splunk username | `.env` file or shell profile |
 | `SPLUNK_PASSWORD` | Splunk password | OS keyring (via configure script) |
 | `SPLUNK_TOKEN` | Bearer token (optional, takes precedence over username/password if set) | Environment variable |
@@ -488,6 +514,7 @@ and their exact names/casing. Use this when:
 
 ### 0. Incident intake checklist (use before querying)
 When the user reports an incident, capture these first:
+- target environment (`prod` or `castle` — ask if not stated; see Environment Selection)
 - suspected `index` (for example `main` for Kubernetes workloads, `docker` for Rancher 1.6 workloads)
 - one or more `sourcetype` values
 - time window (`earliest` and `latest`)

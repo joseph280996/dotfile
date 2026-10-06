@@ -144,30 +144,16 @@ export function scopedLog(id: string): (level: LogLevel, message: string) => voi
 }
 
 /**
- * Minimal structural shape of the `$` shell helper from `PluginInput`.
- *
- * Deliberately not imported from `@opencode-ai/plugin` or `bun-types`: this
- * module stays free of third-party imports (see the header).
- *
- * Generic in the value type so Bun's real `$` — whose values are the narrower
- * `ShellExpression` — stays assignable. Parameter types are contravariant, so
- * hard-coding `unknown[]` here would reject the actual `$` we are handed.
- */
-type Shell<V = string> = (strings: TemplateStringsArray, ...values: V[]) => {
-  quiet: () => Promise<unknown>
-}
-
-/**
  * Whether an external binary is on PATH.
  *
  * Returns a boolean rather than short-circuiting the caller, so each plugin
  * decides its own degraded behavior — lean-ctx returns `{}` (no hooks
  * registered), but another plugin might want to register a subset.
  */
-export async function requireBinary(name: string, $: Shell): Promise<boolean> {
+export async function requireBinary(name: string): Promise<boolean> {
   try {
-    await $`which ${name}`.quiet()
-    return true
+    const proc = Bun.spawn(["which", name], { stdout: "ignore", stderr: "ignore" })
+    return (await proc.exited) === 0
   } catch {
     return false
   }

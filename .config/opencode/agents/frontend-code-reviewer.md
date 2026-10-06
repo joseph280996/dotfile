@@ -45,16 +45,35 @@ description: >-
       </commentary>
     </example>
 mode: all
-permission:
-    "*": deny
-    read: allow
-    grep: allow
-    glob: allow
-    list: allow
-    lsp: allow
-    todowrite: allow
-    edit: deny
-    bash: allow
+model: SSC/us.anthropic.claude-opus-5-5#high
+permissions:
+  - action: "*"
+    resource: "*"
+    effect: deny
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: list
+    resource: "*"
+    effect: allow
+  - action: lsp
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
 
 # Your Role

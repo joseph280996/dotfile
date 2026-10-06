@@ -17,10 +17,16 @@ description: >-
     </example>
 
 mode: all
-permission:
-    read: allow
-    edit: ask
-    bash: allow
+permissions:
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: allow
 ---
 
 You are a local execution specialist for SpecShift. Your responsibility is to run migrated specs on the local machine and provide a clear go/no-go signal for PR creation.

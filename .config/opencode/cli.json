@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "kanagawa"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": true,
+    "thinking": "hide",
+    "tps": true,
+    "markdown": "rendered",
+    "grouping": "auto",
+    "verbosity": "medium",
+    "permissions": "prompt"
+  },
+  "animations": true,
+  "tabs": {
+    "mode": "on",
+    "indicators": "status",
+    "layout": "vertical",
+    "scope": "cwd"
+  },
+  "attention": {
+    "notifications": true,
+    "sound": true,
+    "volume": 1
+  },
+  "plugins": ["./herdr-opencode"]
+}
