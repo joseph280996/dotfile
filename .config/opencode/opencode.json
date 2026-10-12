@@ -1,6 +1,42 @@
 {
-	"$schema": "https://opencode.ai/config.json",
-  "references":  {
+  "$schema": "https://opencode.ai/config.json",
+  "model": "SSC/us.anthropic.claude-sonnet-5",
+  "agents": {
+    "build": {
+      "model": "SSC/zai-org/GLM-5.3-Flash",
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "ask"
+        }
+      ]
+    },
+    "plan": {
+      "model": "SSC/us.anthropic.claude-opus-5-5-1m",
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "ask"
+        },
+        {
+          "action": "edit",
+          "resource": "*.csv",
+          "effect": "allow"
+        },
+        {
+          "action": "edit",
+          "resource": "*.md",
+          "effect": "allow"
+        }
+      ]
+    },
+    "title": {
+      "model": "SSC/us.anthropic.claude-haiku-4-5-20251001-v1:0"
+    }
+  },
+  "references": {
     "services-architecture": {
       "path": "~/Code/Work/ARCH-eclipse-knowledgebase/",
       "description": "This holds all the services' architecture documentation within Eclipse. Consult for any work or design regarding system architecture."
@@ -11,7 +47,7 @@
     },
     "knowledge-base": {
       "path": "~/Documents/knowledge-base",
-      "description": "Use for general knowledge on how each service and the works that was done. Should use this folder for writing plans."
+      "description": "Use for general knowledge on how each service and the works that was done. Use this folder for writing plans that are not tied to a Jira ticket; Jira-scoped plans, specs and notes go to ~/notes/TRAD/Jiras (see rules/jira-notes.md)."
     },
     "nvim-config": {
       "path": "~/.config/nvim",
@@ -26,7 +62,7 @@
       "description": "This is where all of the agent skills live. Use it for when user request a new skill or a modification to an existing skill."
     },
     "global-skills": {
-      "path": "~/.agent/skills",
+      "path": "~/.config/opencode/skills",
       "description": "This is where all of the global agent skills live. Use it for when user request a new skill or a modification to an existing skill."
     },
     "opencode-agents": {
@@ -34,117 +70,174 @@
       "description": "This is where all of the global agent description live. Use it for when user request a new specialized agent or a modification to an existing one."
     }
   },
-	"agent": {
-		"build": {
-			"model": "SSC/zai-org/GLM-5.3-Flash",
-			"permission": {
-				"edit": {
-					"*": "ask"
-				}
-			}
-		},
-		"plan": {
-			"model": "SSC/us.anthropic.claude-opus-5",
-			"permission": {
-				"edit": {
-					"*": "ask",
-					"*.csv": "allow",
-					"*.md": "allow"
-				}
-			}
-		}
-	},
-	"instructions": [".github/instructions/*.md", "~/.config/opencode/rules/*.md"],
-	"mcp": {
-		"ag-mcp": {
-			"command": ["npx", "ag-mcp"],
-			"type": "local"
-		},
-		"jenkins": {
-			"command": ["npx", "jenkins-mcp", "--jenkins-url", "{env:JENKINS_URL}", "--jenkins-username", "tpham4", "--jenkins-password", "{env:JENKINS_API_KEY}"],
-			"type": "local"
-		},
-		"lean-ctx": {
-			"command": ["/opt/homebrew/bin/lean-ctx"],
-			"enabled": true,
-			"environment": {
-				"LEAN_CTX_DATA_DIR": "/Users/tpham4/.config/lean-ctx"
-			},
-			"type": "local"
-		},
-		"mcp-atlassian": {
-			"command": ["uvx", "mcp-atlassian"],
-			"environment": {
-				"JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
-				"JIRA_URL": "{env:ATLASSIAN_JIRA_URL}",
-				"JIRA_USERNAME": "tung.pham@sscinc.com"
-			},
-			"type": "local"
-		},
-		"memory": {
-			"command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
-			"type": "local"
-		},
-		"playwright": {
-			"command": ["npx", "@playwright/mcp@latest"],
-			"type": "local"
-		},
-		"sequentialthinking": {
-			"command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
-			"type": "local"
-		}
-	},
-	"model": "SSC/us.anthropic.claude-sonnet-5",
-	"small_model": "SSC/us.anthropic.claude-haiku-4-5-20251001-v1:0",
-	"plugin": [
-		"superpowers@git+https://github.com/obra/superpowers.git",
-		"@plannotator/opencode@latest",
-		"ecc-universal",
-		"superpowers@git+https://github.com/obra/superpowers.git",
-		"git+https://code.ssnc.dev/ai/claude-agent-orchestration-plugin.git"
-	],
-	"provider": {
-		"SSC": {
-			"npm": "@ai-sdk/anthropic",
-			"name": "SSNC Gateway",
-			"options": {
-				"baseURL": "https://api-ai-us.ssnc-corp.cloud/claude"
-			},
-			"models": {
-				"us.anthropic.claude-opus-5-1m": {
-          "id": "us.anthropic.claude-opus-5",
-					"name": "Opus 5 (1M)",
-					"reasoning": true,
-					"limit": { "context": 1000000, "output": 64000 }
-				},
-				"us.anthropic.claude-opus-5": {
-					"name": "Opus 5"
-				},
-				"us.anthropic.claude-sonnet-5-1m": {
-          "id": "us.anthropic.claude-sonnet-5",
-					"name": "Sonnet 5 (1M)",
-					"limit": { "context": 1000000, "output": 64000 }
-				},
-				"us.anthropic.claude-sonnet-5": {
-					"name": "Sonnet 5"
-				},
-				"us.anthropic.claude-haiku-4-5-20251001-v1:0": {
-					"name": "Haiku 4.5"
-				},
-				"us.anthropic.claude-haiku-4-5-20251001-v1:0-1m": {
-          "id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
-					"name": "Haiku 4.5 (1M)",
-					"limit": { "context": 1000000, "output": 64000 }
-				},
+  "mcp": {
+    "servers": {
+      "sonarqube": {
+        "type": "local",
+        "command": [
+          "docker",
+          "run",
+          "-i",
+          "--rm",
+          "-e",
+          "{env:SONARQUBE_TOKEN}",
+          "-e",
+          "{env:SONARQUBE_URL}",
+          "-e",
+          "{env:SONARQUBE_IDE_PORT}",
+          "mcp/sonarqube"
+        ]
+      },
+      "ag-mcp": {
+        "command": [
+          "npx",
+          "ag-mcp"
+        ],
+        "type": "local"
+      },
+      "jenkins": {
+        "command": [
+          "npx",
+          "jenkins-mcp",
+          "--jenkins-url",
+          "{env:JENKINS_URL}",
+          "--jenkins-username",
+          "tpham4",
+          "--jenkins-password",
+          "{env:JENKINS_API_KEY}"
+        ],
+        "type": "local"
+      },
+      "lean-ctx": {
+        "command": [
+          "/opt/homebrew/bin/lean-ctx"
+        ],
+        "environment": {
+          "LEAN_CTX_DATA_DIR": "/Users/tpham4/.config/lean-ctx"
+        },
+        "type": "local",
+        "disabled": false
+      },
+      "mcp-atlassian": {
+        "command": [
+          "uvx",
+          "mcp-atlassian"
+        ],
+        "environment": {
+          "JIRA_API_TOKEN": "{env:ATLASSIAN_JIRA_API_KEY}",
+          "JIRA_URL": "{env:ATLASSIAN_JIRA_URL}",
+          "JIRA_USERNAME": "tung.pham@sscinc.com"
+        },
+        "type": "local"
+      },
+      "memory": {
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-memory"
+        ],
+        "type": "local"
+      },
+      "playwright": {
+        "command": [
+          "npx",
+          "@playwright/mcp@latest"
+        ],
+        "type": "local"
+      },
+      "sequentialthinking": {
+        "command": [
+          "npx",
+          "-y",
+          "@modelcontextprotocol/server-sequential-thinking"
+        ],
+        "type": "local"
+      }
+    }
+  },
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "@plannotator/opencode@latest"
+  ],
+  "providers": {
+    "SSC": {
+      "package": "aisdk:@ai-sdk/anthropic",
+      "name": "SSNC Gateway",
+      "settings": {
+        "baseURL": "https://api-ai-us.ssnc-corp.cloud/claude"
+      },
+      "models": {
+        "us.anthropic.claude-opus-5-5-1m": {
+          "modelID": "us.anthropic.claude-opus-5-5",
+          "name": "Opus 5.5 (1M)",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "settings": {
+            "thinking": {
+              "type": "adaptive",
+              "display": "summarized"
+            }
+          }
+        },
+        "us.anthropic.claude-opus-5-5": {
+          "name": "Opus 5.5",
+          "settings": {
+            "thinking": {
+              "type": "adaptive",
+              "display": "summarized"
+            }
+          }
+        },
+        "us.anthropic.claude-sonnet-5-5-1m": {
+          "modelID": "us.anthropic.claude-sonnet-5-5",
+          "name": "Sonnet 5.5 (1M)",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          }
+        },
+        "us.anthropic.claude-sonnet-5-5": {
+          "name": "Sonnet 5.5"
+        },
+        "us.anthropic.claude-sonnet-5-1m": {
+          "modelID": "us.anthropic.claude-sonnet-5",
+          "name": "Sonnet 5 (1M)",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          }
+        },
+        "us.anthropic.claude-sonnet-5": {
+          "name": "Sonnet 5"
+        },
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0-1m": {
+          "modelID": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+          "name": "Haiku 4.5 (1M)",
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          }
+        },
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "name": "Haiku 4.5"
+        },
         "zai-org/GLM-5.3-Flash": {
           "name": "GLM-5.3 Flash",
-					"limit": { "context": 1000000, "output": 64000 }
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          }
         },
         "google/gemma-4-31B-it": {
           "name": "Gemma 4 (31B)",
-					"limit": { "context": 32000, "output": 32000 }
+          "limit": {
+            "context": 32000,
+            "output": 32000
+          }
         }
-			}
-		}
-	}
+      }
+    }
+  }
 }
