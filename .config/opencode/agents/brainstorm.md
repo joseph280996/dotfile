@@ -1,6 +1,6 @@
 ---
 description: Creative design dialogue — explores widely before converging on a spec
-mode: primary
+mode: all
 model: SSC/us.anthropic.claude-opus-5-5-1m#high
 
 color: "#ff6b6b"
@@ -25,7 +25,7 @@ permissions:
     effect: allow
   - action: subagent
     resource: "*"
-    effect: deny
+    effect: ask
   - action: shell
     resource: "*"
     effect: allow

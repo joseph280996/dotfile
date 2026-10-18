@@ -39,7 +39,7 @@ This loads the ECC OpenCode plugin module from npm:
 
 It does **not** auto-register the full ECC command/agent/instruction catalog in your project config. For the full OpenCode setup, either:
 - run OpenCode inside this repository, or
-- copy the relevant `.opencode/commands/`, `.opencode/agents/*.md`, `.opencode/instructions/`, and the `instructions` and `command` config entries into your own project (subagents are Markdown files under `agents/`, so no `agent` config block is needed)
+- copy the relevant `.opencode/commands/`, `.opencode/instructions/`, and the `instructions` and `command` config entries into your own project, then convert the `agent` entries into Markdown agent files under `agents/` (one file per subagent: `description` and `mode: subagent` frontmatter, the prompt as the body — no `agent` config block needed)
 
 After installation, the `ecc-install` CLI is also available:
 
@@ -229,7 +229,8 @@ Full configuration in `opencode.json`:
     "skills/tdd-workflow/SKILL.md",
     "skills/security-review/SKILL.md"
   ],
-  "agents": "subagents live in agents/*.md — 25 Markdown files, one per ECC subagent; only the primary `build` override stays in the `agent` config block",
+  "agent": { /* just the primary build override */ },
+  /* the 25 subagents live in agents/*.md (Markdown agent files), not in this config */
   "command": { /* 24 commands */ }
 }
 ```

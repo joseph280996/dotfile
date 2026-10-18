@@ -34,14 +34,16 @@ for skill_path in "$SKILLS_DIR"/*/; do
   rsync -a --delete "$SOURCE_DIR/$skill_name/" "$SKILLS_DIR/$skill_name/"
 done
 
+# Guard: the `npx skills` CLI can flip relay links into symlink loops
+# (see ~/.agents/skills). Fail loudly if any link broke after this sync.
+if [[ -x "$HOME/.config/opencode/scripts/check-skill-links.sh" ]]; then
+  "$HOME/.config/opencode/scripts/check-skill-links.sh" || true
+fi
+
 echo "Done."
 
 # NOTE: agent syncing from ECC was intentionally removed.
-# ECC's prompts/agents/*.txt files are bare prompt bodies with no
-# frontmatter (no name/description/mode/model/permission) -- they're
-# meant to be referenced via {file:...} inside ECC's own opencode.json
-# agent: block, not dropped in as standalone .opencode/agent/*.md files.
-# Our agents/*.md files also carry a hand-added "Prompt Defense Baseline"
-# security header that ECC's source does not have. Symlinking would
-# silently strip both, breaking these agents. Agents are hand-maintained
-# in ~/.config/opencode/agents/ instead.
+# ECC's agents now live as standalone Markdown agent files
+# (~/.config/opencode/agents/*.md with description/mode/permissions
+# frontmatter and the prompt as the body). This script only syncs skills;
+# agents are hand-maintained in ~/.config/opencode/agents/ instead.

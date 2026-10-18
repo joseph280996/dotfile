@@ -29,7 +29,7 @@ permissions:
     effect: deny
   - action: subagent
     resource: "*"
-    effect: deny
+    effect: ask
   - action: shell
     resource: "*"
     effect: allow

@@ -7,8 +7,8 @@
     "wrap": "word"
   },
   "session": {
-    "sidebar": "hide",
-    "scrollbar": true,
+    "sidebar": "auto",
+    "scrollbar": false,
     "thinking": "hide",
     "tps": true,
     "markdown": "rendered",
@@ -28,5 +28,16 @@
     "sound": true,
     "volume": 1
   },
-  "plugins": ["./herdr-opencode"]
+  "plugins": [
+    "./herdr-opencode",
+    {
+      "package": "./plugins/centered-layout",
+      "options": {
+        "maxWidth": 110
+      }
+    }
+  ],
+  "terminal": {
+    "title": false
+  }
 }

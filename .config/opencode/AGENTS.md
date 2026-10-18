@@ -1,3 +1,74 @@
+# Working style
+
+- Be concise. Answer directly, with no filler and no restating of the question.
+- Push back on a design decision when you see a concrete problem or a simpler
+  alternative, and say why.
+- Store all temporary files in `/private/tmp`.
+- Make code changes in a git worktree (use the `git-worktree-setup` skill). The
+  worktree goes where the skill puts it, next to the repo. Edit dotfiles in
+  `~/config` in place.
+- Use the `gh` CLI for everything related to GitHub. For GitHub Issues work
+  (work queue, triage), use the `github-issues` skill.
+
+## Wording
+
+Write documentation, comments, and other prose in ASD-STE100 Simplified
+Technical English for about 80% of the content.
+
+## Writing code
+
+- On an existing codebase, make the minimum change that adds or updates the
+  behavior. Refactor only when it is strictly needed or the user asks for it.
+- Write the simplest code a human can read at a glance: direct control flow,
+  shallow indirection, specific helpers instead of generic ones.
+- Use human-readable variable names of 20 characters or fewer. Use a longer
+  name only when it is strictly necessary.
+
+# Delegation
+
+Parallelize by default. Before executing a multi-step task, shape it as
+independent work: multiple `explore` subagents for codebase discovery, one
+task/todo file per parallel worker for builds, all dispatched together
+(`subagent` tool, or herdr panes for opencode agents). Confirm the
+parallel plan with the user before spawning workers that edit files.
+
+Route specialized work to the agent built for it:
+
+- **Plan, spec, or design** (non-trivial): switch to the `plan` agent
+  (in plan mode it runs its grilling protocol first, then turns settled
+  requirements into the plan). For a dispatchable planning pass from
+  another session, send the settled requirements to the `plan` agent as
+  a `subtask: true` command target.
+- **Creative "is this worth building" ideation**: dispatch the `brainstorm`
+  subagent (`mode: all` — it also works as a primary agent in the TUI when
+  you want the full interactive dialogue).
+- **Code review of a branch or PR**: dispatch the `pr-reviewer` subagent.
+  For a quick second opinion rather than a full review, consult the
+  `advisor` (existing rules above).
+- **Parallel file-editing work**: follow the `orchestrating-parallel-workers`
+  skill — task files in `/private/tmp/tasks/`, `worker` subagents, advisor
+  pre-flight on the task files, reports read from files.
+- **Posting findings to a PR on GitHub**: dual-lock. The `pr-reviewer`
+  agent never posts — it writes findings to a file and triages them with
+  the user. Posting any finding as a PR comment, review, or issue is a
+  separate action that **always, without exception, requires the user's
+  explicit confirmation of the exact findings and destination first**,
+  in a dedicated question. A yes to reviewing is never a yes to posting.
+  `pull-requests.md` governs PR actions generally; this extends that rule
+  to PR comments and reviews.
+
+# Topic rules
+
+Read the rule file before the task, and follow it:
+
+- About to write or edit a code comment: read
+  `~/.config/opencode/rules/code-comments.md`.
+- About to open or update a pull request: read
+  `~/.config/opencode/rules/pull-requests.md`.
+- About to write tests: read `~/.config/opencode/rules/test-reuse.md`.
+- About to write a plan, spec, or note for a Jira ticket: read
+  `~/.config/opencode/rules/jira-notes.md`.
+
 <!-- context7 -->
 Use the `ctx7` CLI to fetch current documentation whenever the user asks about a library, framework, SDK, API, CLI tool, or cloud service -- even well-known ones like React, Next.js, Prisma, Express, Tailwind, Django, or Spring Boot. This includes API syntax, configuration, version migration, library-specific debugging, setup instructions, and CLI tool usage. Use even when you think you know the answer -- your training data may not reflect recent changes. Prefer this over web search for library docs.
 
@@ -173,3 +244,40 @@ Once the frontier is empty and the user has confirmed shared understanding —
 or once the gate above has let you skip the session — write the plan and
 submit it for review. This section applies to plan mode only: do not carry
 the grilling protocol into `build` or into subagents.
+
+<!-- lean-ctx-rules -->
+<!-- version: 11 -->
+
+lean-ctx shadow mode: native read/search/shell calls auto-route to ctx_* — no tool-mapping needed.
+File editing → the host's native edit tool (lean-ctx only handles reads).
+Exclusive tools (no native trigger): ctx_compose (understand code, call first), ctx_search(action=symbol) (exact symbol), ctx_search(action=semantic) (by meaning), ctx_callgraph (callers), ctx_knowledge / ctx_session (memory).
+<!-- lean-ctx-compression -->
+OUTPUT STYLE: concise
+- Bullet points over paragraphs
+- Skip filler words and hedging ("I think", "probably", "it seems")
+- 1-sentence explanations max, then code/action
+- No repeating what the user said
+<!-- /lean-ctx-compression -->
+<!-- lean-ctx-solution -->
+SOLUTION EFFICIENCY: stop at first level that applies:
+skip (YAGNI) → reuse codebase → stdlib → native platform → installed dep → one-line → minimum code.
+Never skip: validation, security, error handling.
+<!-- /lean-ctx-solution -->
+<!-- /lean-ctx-rules -->
+
+# Per-repo personal rules
+
+- The `repo-rules` plugin injects a `<repo-rules>` block into your
+  instructions when the current repo has a mapped rules file. If that
+  block is absent (plugin inactive), resolve the repo name yourself
+  (`basename $(dirname $(git rev-parse --path-format=absolute --git-common-dir))`),
+  read
+  `~/Documents/knowledge-base/repo-map.json`, and if the repo is mapped
+  (or `Eclipse/Trading/<repo>/` exists), read that folder's `rules.md`
+  before making changes and treat it as authoritative alongside the
+  repo's own AGENTS.md.
+- When you learn something durable about a repo, follow the `growth-log`
+  skill and propose the entry into the mapped service folder in
+  `~/Documents/knowledge-base` — never write it into the repo itself.
+- `~/notes` and the knowledge-base folders are for human and personal
+  notes; only a mapped `rules.md` is auto-loaded rules.

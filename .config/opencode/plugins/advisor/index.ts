@@ -1,9 +1,9 @@
 import { Plugin } from "@opencode/plugin"
 import { homedir } from "node:os"
 import { join } from "node:path"
-import { hookEnabled, scopedLog, sentinelExists } from "./lib/hooks.ts"
-import type { PartMarker } from "./lib/session.ts"
-import { readSession, syntheticMarker, userRejectionMarker } from "./lib/session.ts"
+import { hookEnabled, scopedLog, sentinelExists } from "../lib/hooks.ts"
+import type { PartMarker } from "./session.ts"
+import { readSession, syntheticMarker, userRejectionMarker } from "./session.ts"
 
 /**
  * Automatic advisor consults on turn completion.

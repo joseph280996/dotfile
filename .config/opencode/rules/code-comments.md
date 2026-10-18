@@ -1,41 +1,33 @@
 # Code comments
 
-Do not add comments that restate what the code already says. Only add a
-comment when the code alone would leave the reader without something they
-need: a non-obvious *why* (a constraint, a workaround, a deliberate
-trade-off), a warning about a footgun, or context that cannot be expressed in
-code (a ticket/design-doc reference, a contract a caller must uphold). If the
-comment would just paraphrase the next line in English, omit it — prefer
-naming things clearly instead. This applies to new code and to edits of
-existing code alike.
+Keep comments brief, ideally one line. Leave self-explanatory code without a
+comment. A function or class may have one short line that says what it does or
+what it is for; no long paragraphs.
 
-Three recurring failure modes to watch for specifically:
+Anything beyond that line may only carry something the code cannot say: a
+non-obvious *why* (a constraint, a workaround, a deliberate trade-off), a
+warning about a footgun, or external context (a ticket/design-doc reference, a
+contract a caller must uphold). If deleting the comment loses nothing, the
+comment must not exist. Test code is not exempt: `// Arrange` / `// Act` /
+`// Assert` labels and comments narrating what a stub returns are the same
+violation.
 
-- **Narrating a return/branch instead of explaining it.** A comment like
-  `// returns the failure so the caller can report it` next to
-  `return (value, failure)` just restates the return statement and the
-  caller's role, both already visible from the signature and call graph. If
-  you catch yourself writing a comment that describes *what* a return,
-  branch, or call does rather than a non-obvious *why*, delete it outright —
-  do not just shorten it. A trimmed restatement is still a restatement.
-- **Hardcoding today's caller into a general-purpose comment.** Do not name a
-  specific concrete caller class/method inside a comment written in a
-  general-purpose method, function, or interface implementation, even if
-  that caller is the only one that exists right now. Callers can change
-  without the comment being revisited, and the comment should describe the
-  contract/invariant, not couple itself to whoever happens to call it today.
-- **Attributing a change to a person, review thread, or ticket-of-the-moment.**
-  Do not write "bogu's review comment", "per PR #902", "as discussed in
-  review", or similar into a code comment. The code will outlive the review
-  thread, the PR number, and everyone's memory of who raised what — a comment
-  that leans on that context is unreadable to the next person and stale the
-  moment the thread is closed. State the invariant, the bug that would
-  otherwise recur, or the trade-off directly, as if no review ever happened.
-  A stable ticket ID for a genuinely open follow-up is fine (`// see IMSTR-1234`
-  for unfinished work); a reviewer's name or a review-thread reference is not.
+Three failure modes to watch for:
 
-Before adding any comment, ask: "does this only restate the next line, or
-the surrounding control flow/caller behavior that's already visible in the
-code?" If yes, omit it entirely rather than trimming it. Also ask: "would this
-comment mean anything to someone with no access to the review thread or PR
-this code came from?" If not, rewrite it to stand on its own.
+- **Narrating instead of explaining.** A comment that restates the parameters,
+  return value, body, or call graph ("takes the X and returns the Y so the
+  caller can report it", "logs start and end of the call") is already visible
+  in the code. Beyond the one allowed purpose line, a *what* comment gets
+  deleted outright, not shortened — a trimmed restatement is still one. When
+  naming things clearly would remove the need for the comment, do that
+  instead.
+- **Hardcoding today's caller.** Do not name a specific caller
+  class/method inside a general-purpose function or interface implementation,
+  even when it is the only one today. Callers change without the comment being
+  revisited; describe the contract or invariant, not whoever calls it now.
+- **Attributing a change to a person or review thread.** Do not write "bogu's
+  review comment", "per PR #902", "as discussed in review". The code outlives
+  the review thread; state the invariant, the bug that would otherwise recur,
+  or the trade-off directly. A stable ticket ID for genuinely open follow-up
+  is fine (`// see IMSTR-1234`); a reviewer's name or review-thread reference
+  is not.
