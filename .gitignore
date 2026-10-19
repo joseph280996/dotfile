@@ -62,3 +62,7 @@
 
 !/.config/opencode
 !.config/opencode/**
+
+# Internal company code: local clone + generated agents (never publish)
+.config/opencode/claude-agent-orchestration-plugin/
+.config/opencode/agents/agent-orch/
