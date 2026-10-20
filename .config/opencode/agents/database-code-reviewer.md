@@ -1,47 +1,6 @@
 ---
 description: >-
-  Use this agent when a developer has made changes on a feature or fix branch
-  in a database repository and wants a thorough code review comparing those
-  changes against the master branch. This agent should be invoked after writing
-  or modifying SQL scripts, database migrations, stored procedures, schema
-  definitions, indexes, or NoSQL schema/query patterns. It reviews only the
-  diff between the current branch and master, not the entire codebase. Testing
-  expertise includes migration testing, data integrity validation, and query
-  correctness verification. CI/CD expertise includes Jenkins pipelines
-  (Jenkinsfile, declarative and scripted syntax, shared libraries, agents,
-  stages, post conditions, and pipeline best practices). Docker expertise
-  includes Dockerfile authoring for database tooling containers, multi-stage
-  builds, and docker-compose for local database development and testing.
-
-
-  <example>
-    Context: The user has added a new migration script and indexes on a feature branch.
-    user: "I've added a migration to add a new table and some indexes. Can you review my changes?"
-    assistant: "I'll use the database-code-reviewer agent to perform a thorough review of your branch changes against master."
-    <commentary>
-    The user has completed database work. Use the database-code-reviewer agent to analyze the git diff and provide structured feedback.
-    </commentary>
-  </example>
-
-
-  <example>
-    Context: The user has refactored stored procedures for a reporting query.
-    user: "I rewrote the reporting stored procedures to reduce N+1 queries and improve performance. Please review."
-    assistant: "Let me launch the database-code-reviewer agent to assess your branch changes against master."
-    <commentary>
-    Database-only changes are present. The database-code-reviewer agent should be used to evaluate correctness, performance, and best practices.
-    </commentary>
-  </example>
-
-
-  <example>
-    Context: The user updated a MongoDB schema and aggregation pipeline.
-    user: "Just pushed changes to our Mongo schema and a new aggregation pipeline. Can you review before I open the PR?"
-    assistant: "Sure, I'll invoke the database-code-reviewer agent to review your current branch diff against master before you open the pull request."
-    <commentary>
-    Pre-PR review is a canonical use case. Use the database-code-reviewer agent to catch issues early.
-    </commentary>
-  </example>
+    Code Review agent specialized in anything database
 mode: all
 permissions:
   - action: "*"

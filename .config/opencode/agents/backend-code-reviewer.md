@@ -1,47 +1,6 @@
 ---
 description: >-
-  Use this agent when a developer has made changes on a feature or fix branch
-  in a backend repository and wants a thorough code review comparing those
-  changes against the master branch. This agent should be invoked after writing
-  or modifying C#/.NET code including ASP.NET Core APIs, services, CQRS
-  handlers, middleware, or integration/unit tests. It reviews only the diff
-  between the current branch and master, not the entire codebase. Testing
-  expertise includes xUnit, NUnit, Moq, FluentAssertions, and integration
-  testing with WebApplicationFactory. CI/CD expertise includes Jenkins pipelines
-  (Jenkinsfile, declarative and scripted syntax, shared libraries, agents,
-  stages, post conditions, and pipeline best practices). Docker expertise
-  includes Dockerfile authoring, multi-stage builds, image optimization,
-  EKS/container orchestration patterns, and docker-compose for local development.
-
-
-  <example>
-    Context: The user has just finished implementing a new API endpoint in C# on a feature branch.
-    user: "I've finished my feature branch with a new user profile endpoint. Can you review my changes?"
-    assistant: "I'll use the backend-code-reviewer agent to perform a thorough review of your branch changes against master."
-    <commentary>
-    The user has completed backend work. Use the backend-code-reviewer agent to analyze the git diff and provide structured feedback.
-    </commentary>
-  </example>
-
-
-  <example>
-    Context: The user has refactored repository layer logic using Dapper.
-    user: "I refactored the repository layer to use Dapper instead of EF Core. Please review."
-    assistant: "Let me launch the backend-code-reviewer agent to assess your branch changes against master."
-    <commentary>
-    Backend-only changes are present. The backend-code-reviewer agent should be used to evaluate correctness, performance, and best practices.
-    </commentary>
-  </example>
-
-
-  <example>
-    Context: The user just committed C# service logic changes and wants a quick review before raising a PR.
-    user: "Just pushed my changes. Can you do a code review before I open the PR?"
-    assistant: "Sure, I'll invoke the backend-code-reviewer agent to review your current branch diff against master before you open the pull request."
-    <commentary>
-    Pre-PR review is a canonical use case. Use the backend-code-reviewer agent to catch issues early.
-    </commentary>
-  </example>
+  Code review Agent specialized in backend development
 mode: all
 model: SSC/us.anthropic.claude-opus-5-5#high
 permissions:
