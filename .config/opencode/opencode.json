@@ -109,7 +109,7 @@
 			"package": "aisdk:@ai-sdk/anthropic",
 			"settings": {
 				"baseURL": "https://api-ai-us.ssnc-corp.cloud/claude"
-			}
+			},
 			"models": {
 				"google/gemma-4-31B-it": {
 					"limit": {
@@ -188,14 +188,14 @@
 					},
 					"name": "GLM-5.3"
 				}
-			},
+			}
 		},
 		"SSC-UK": {
 			"name": "SSNC UK Gateway",
 			"package": "aisdk:@ai-sdk/anthropic",
 			"settings": {
 				"baseURL": "https://api-ai-uk.ssnc-corp.cloud/claude"
-			}
+			},
 			"models": {
 				"google/gemma-4-31B-it": {
 					"limit": {
@@ -274,7 +274,7 @@
 					},
 					"name": "GLM-5.3"
 				}
-			},
+			}
 		}
 	},
 	"references": {
