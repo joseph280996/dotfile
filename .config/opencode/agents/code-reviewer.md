@@ -1,6 +1,6 @@
 ---
 description: "Expert code review specialist. Reviews code for quality, security, and maintainability. Use immediately after writing or modifying code."
-mode: subagent
+mode: all
 permissions:
   - action: edit
     resource: "*"

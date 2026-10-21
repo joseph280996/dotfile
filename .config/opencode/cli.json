@@ -14,11 +14,11 @@
     "markdown": "rendered",
     "grouping": "auto",
     "verbosity": "medium",
-    "permissions": "prompt"
+    "permissions": "autoaccept"
   },
   "animations": true,
   "tabs": {
-    "mode": "on",
+    "mode": "auto",
     "indicators": "status",
     "layout": "vertical",
     "scope": "cwd"

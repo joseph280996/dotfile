@@ -3,6 +3,18 @@ description: "The single planning agent. Runs on Sonnet 5.5 by default and escal
 mode: primary
 model: SSC/us.anthropic.claude-sonnet-5-5
 permissions:
+    - action: glob
+      resource: "*"
+      effect: allow
+    - action: glob
+      resource: "*.env"
+      effect: ask
+    - action: glob
+      resource: "*.env.*"
+      effect: ask
+    - action: glob
+      resource: "*.env.example"
+      effect: allow
     - action: read
       resource: "*"
       effect: allow

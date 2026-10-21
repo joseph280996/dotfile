@@ -109,7 +109,11 @@ export default Plugin.define({
       ],
     }))
 
-    const pass = { onLifecyclePass: () => apply() }
+    // OpenTUI >= 2.1 calls _needsLifecyclePass() on every pass-set entry.
+    const pass = {
+      _needsLifecyclePass: () => true,
+      onLifecyclePass: () => apply(),
+    }
     renderer.registerLifecyclePass(pass)
 
     return () => {
