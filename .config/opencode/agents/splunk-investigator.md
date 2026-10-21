@@ -1,7 +1,7 @@
 ---
 description: Lightweight Splunk investigator. Loads the splunk-query skill, runs the exact query it is given against the given environment, and reports raw numbers, the exact SPL, and decisive raw lines. Never edits files.
 mode: subagent
-model: SSC/zai-org/GLM-5.3-Flash
+model: SSC-US/zai-org/GLM-5.3-Flash
 permissions:
   - action: "*"
     resource: "*"

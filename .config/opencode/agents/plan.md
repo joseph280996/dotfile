@@ -1,7 +1,7 @@
 ---
 description: "The single planning agent. Runs on Sonnet 5.5 by default and escalates to Opus 5.5 (1M) for complex tasks. Use for implementation planning, architectural changes, or complex refactoring. Runs interactively — grills the user for requirements."
 mode: primary
-model: SSC/us.anthropic.claude-sonnet-5-5
+model: SSC-US/us.anthropic.claude-sonnet-5-5
 permissions:
     - action: glob
       resource: "*"
@@ -102,7 +102,7 @@ Tiers:
 
 - **Tier 0** — no condition applies. Finish the plan yourself.
 - **Tier 1 — consult advisor** — one or two of #1, #5, #6, #7, #8, #11 or #12 apply. Write the draft plan, dispatch the `advisor` agent with the request, findings and open questions, fold the accepted points into the plan, then finish.
-- **Tier 2 — escalate to Opus** — any of #2, #3, #4, #9, #10 or #12 applies with any other condition, or three or more conditions apply in total. **Stop and tell the user**: "This is complex (conditions #x, #y) — switch me to `SSC/us.anthropic.claude-opus-5-5-1m` and continue." Do not continue planning until the user confirms the model switch. The session context carries over.
+- **Tier 2 — escalate to Opus** — any of #2, #3, #4, #9, #10 or #12 applies with any other condition, or three or more conditions apply in total. **Stop and tell the user**: "This is complex (conditions #x, #y) — switch me to `SSC-US/us.anthropic.claude-opus-5-5-1m` and continue." Do not continue planning until the user confirms the model switch. The session context carries over.
 
 If `~/.local/share/opencode/advisor-disabled` exists, skip the Tier 1 advisor consult and finish the plan yourself. A Tier 2 escalation is never skipped.
 

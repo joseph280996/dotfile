@@ -2,7 +2,7 @@
 description: >-
   Code review Agent specialized in backend development
 mode: all
-model: SSC/us.anthropic.claude-opus-5-5#high
+model: SSC-US/us.anthropic.claude-opus-5-5#high
 permissions:
   - action: "*"
     resource: "*"

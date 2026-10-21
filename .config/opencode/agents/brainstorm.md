@@ -1,7 +1,7 @@
 ---
 description: Creative design dialogue — explores widely before converging on a spec
 mode: all
-model: SSC/us.anthropic.claude-opus-5-5-1m#high
+model: SSC-US/us.anthropic.claude-opus-5-5-1m#high
 
 color: "#ff6b6b"
 permissions:

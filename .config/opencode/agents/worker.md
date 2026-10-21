@@ -1,7 +1,7 @@
 ---
 description: Fail-closed parallel worker. Dispatch for fan-out tasks that may edit files; blocks dangerous operations and reports BLOCKED instead of waiting at dialogs. Never spawns subagents, commits, publishes, or contacts the network.
 mode: subagent
-model: SSC/us.anthropic.claude-sonnet-5-5
+model: SSC-US/us.anthropic.claude-sonnet-5-5
 permissions:
   - action: "*"
     resource: "*"
