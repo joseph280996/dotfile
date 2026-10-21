@@ -101,7 +101,7 @@
 		}
 	},
 	"model": "SSC-US/us.anthropic.claude-sonnet-5",
-	"permissions": "{file:./permission.json}",
+	"permissions": "{file:./permissions.json}",
 	"plugins": ["superpowers@git+https://github.com/obra/superpowers.git", "@plannotator/opencode@latest"],
 	"providers": {
 		"SSC-US": {
@@ -119,7 +119,8 @@
 					"name": "Gemma 4 (31B)"
 				},
 				"us.anthropic.claude-haiku-5-5": {
-					"name": "Haiku 5.5"
+					"name": "Haiku 5.5",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-haiku-5-5-1m": {
 					"limit": {
@@ -127,16 +128,12 @@
 						"output": 64000
 					},
 					"modelID": "us.anthropic.claude-haiku-5-5",
-					"name": "Haiku 5.5 (1M)"
+					"name": "Haiku 5.5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-opus-5-5": {
 					"name": "Opus 5.5",
-					"settings": {
-						"thinking": {
-							"display": "summarized",
-							"type": "adaptive"
-						}
-					}
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-opus-5-5-1m": {
 					"limit": {
@@ -145,15 +142,11 @@
 					},
 					"modelID": "us.anthropic.claude-opus-5-5",
 					"name": "Opus 5.5 (1M)",
-					"settings": {
-						"thinking": {
-							"display": "summarized",
-							"type": "adaptive"
-						}
-					}
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-sonnet-5": {
-					"name": "Sonnet 5"
+					"name": "Sonnet 5",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-sonnet-5-1m": {
 					"limit": {
@@ -161,10 +154,12 @@
 						"output": 64000
 					},
 					"modelID": "us.anthropic.claude-sonnet-5",
-					"name": "Sonnet 5 (1M)"
+					"name": "Sonnet 5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-sonnet-5-5": {
-					"name": "Sonnet 5.5"
+					"name": "Sonnet 5.5",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"us.anthropic.claude-sonnet-5-5-1m": {
 					"limit": {
@@ -172,7 +167,8 @@
 						"output": 64000
 					},
 					"modelID": "us.anthropic.claude-sonnet-5-5",
-					"name": "Sonnet 5.5 (1M)"
+					"name": "Sonnet 5.5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"zai-org/GLM-5.3-Flash": {
 					"limit": {
@@ -205,7 +201,8 @@
 					"name": "Gemma 4 (31B)"
 				},
 				"uk.anthropic.claude-haiku-5-5": {
-					"name": "Haiku 5.5"
+					"name": "Haiku 5.5",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-haiku-5-5-1m": {
 					"limit": {
@@ -213,16 +210,12 @@
 						"output": 64000
 					},
 					"modelID": "uk.anthropic.claude-haiku-5-5",
-					"name": "Haiku 5.5 (1M)"
+					"name": "Haiku 5.5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-opus-5-5": {
 					"name": "Opus 5.5",
-					"settings": {
-						"thinking": {
-							"display": "summarized",
-							"type": "adaptive"
-						}
-					}
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-opus-5-5-1m": {
 					"limit": {
@@ -231,15 +224,11 @@
 					},
 					"modelID": "uk.anthropic.claude-opus-5-5",
 					"name": "Opus 5.5 (1M)",
-					"settings": {
-						"thinking": {
-							"display": "summarized",
-							"type": "adaptive"
-						}
-					}
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-sonnet-5": {
-					"name": "Sonnet 5"
+					"name": "Sonnet 5",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-sonnet-5-1m": {
 					"limit": {
@@ -247,10 +236,12 @@
 						"output": 64000
 					},
 					"modelID": "uk.anthropic.claude-sonnet-5",
-					"name": "Sonnet 5 (1M)"
+					"name": "Sonnet 5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"uk.anthropic.claude-sonnet-5-5": {
-					"name": "Sonnet 5.5"
+					"name": "Sonnet 5.5",
+					"compatibility": { "supportsThinkingBlockBinding": false },
 				},
 				"uk.anthropic.claude-sonnet-5-5-1m": {
 					"limit": {
@@ -258,7 +249,8 @@
 						"output": 64000
 					},
 					"modelID": "uk.anthropic.claude-sonnet-5-5",
-					"name": "Sonnet 5.5 (1M)"
+					"name": "Sonnet 5.5 (1M)",
+					"compatibility": { "supportsThinkingBlockBinding": false }
 				},
 				"zai-org/GLM-5.3-Flash": {
 					"limit": {
