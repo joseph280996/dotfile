@@ -32,6 +32,20 @@ task/todo file per parallel worker for builds, all dispatched together
 (`subagent` tool, or herdr panes for opencode agents). Confirm the
 parallel plan with the user before spawning workers that edit files.
 
+# Herdr integration
+
+Herdr manages OpenCode's terminal panes and tracks agent state through a
+plugin it installs and owns:
+
+- `~/.config/opencode/plugins/herdr-agent-state.js` is **managed by herdr**.
+  Never edit it; reinstalls and updates overwrite it
+  (`herdr integration install opencode` reinstalls, `herdr integration list`
+  shows per-agent versions).
+- Add custom plugins beside it in `~/.config/opencode/plugins/` — herdr
+  updates never touch other files there.
+- Driving herdr itself (panes, tabs, sessions) needs `HERDR_ENV=1` and only
+  on explicit request — see the `herdr` skill.
+
 Route specialized work to the agent built for it:
 
 - **Plan, spec, or design** (non-trivial): switch to the `plan` agent

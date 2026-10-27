@@ -18,7 +18,7 @@
   },
   "animations": true,
   "tabs": {
-    "mode": "auto",
+    "mode": "on",
     "indicators": "status",
     "layout": "vertical",
     "scope": "cwd"
