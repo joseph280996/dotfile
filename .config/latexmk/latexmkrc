@@ -1,0 +1,6 @@
+## pdf mode
+$pdf_mode   = 1; # 0: none, 1: pdflatex, 2: ps2pdf, 3: dvipdf
+
+## output directory
+$aux_dir    = "build";
+$out_dir    = "build";

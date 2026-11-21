@@ -1,0 +1,89 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "1",
+        "type": "model",
+        "color": "hex:7E9CD8"
+      },
+      {
+        "id": "2",
+        "type": "separator"
+      },
+      {
+        "id": "3",
+        "type": "context-percentage",
+        "color": "hex:717C7C"
+      },
+      {
+        "id": "4",
+        "type": "separator"
+      },
+      {
+        "id": "5",
+        "type": "cwd",
+        "color": "hex:957FB8"
+      },
+      {
+        "id": "6",
+        "type": "separator"
+      },
+      {
+        "id": "7",
+        "type": "git-branch",
+        "color": "hex:957FB8"
+      },
+      {
+        "id": "6",
+        "type": "separator"
+      },
+      {
+        "id": "8",
+        "type": "custom-command",
+        "commandPath": "/Users/tpham4/.config/ccstatusline/scripts/ssnc-gateway-spend.sh",
+        "timeout": 4000,
+        "color": "hex:DCA561",
+        "preserveColors": true
+      },
+      {
+        "id": "9",
+        "type": "separator"
+      },
+      {
+        "id": "10",
+        "type": "custom-command",
+        "commandPath": "/Users/tpham4/.config/ccstatusline/scripts/ssnc-gateway-spend-eom.sh",
+        "timeout": 4000,
+        "color": "hex:DCA561",
+        "preserveColors": true
+      }
+    ],
+    [],
+    []
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 3,
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "pinned",
+    "installedVersion": "2.2.34"
+  }
+}

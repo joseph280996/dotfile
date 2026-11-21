@@ -1,0 +1,10 @@
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgSign = true
+
+[user]
+	name = 'Tung Pham'
+  email = 'joseph.pham280996@gmail.com'
+	signingkey = C8821D946828E6DE

@@ -1,0 +1,6 @@
+.claude/
+node_modules/
+
+**/*__pycache__/
+
+**/.claude/settings.local.json

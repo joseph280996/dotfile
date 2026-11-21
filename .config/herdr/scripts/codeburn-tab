@@ -1,0 +1,10 @@
+#!/bin/sh
+# Spawn or focus the Codeburn tab. Bound to prefix+u in config.toml.
+# shortcut: tab list has no "find by label" command; scan the JSON output.
+existing=$(herdr tab list 2>/dev/null | jq -r '.result.tabs[] | select(.label=="Codeburn") | .tab_id' | head -1)
+if [ -n "$existing" ]; then
+  exec herdr tab focus "$existing"
+fi
+created=$(herdr tab create --label Codeburn --focus 2>/dev/null) || exit 1
+pane=$(printf '%s' "$created" | jq -r '.result.root_pane.pane_id // .result.root_pane // empty')
+[ -n "$pane" ] && herdr pane run "$pane" codeburn

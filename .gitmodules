@@ -1,0 +1,9 @@
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = git@github.com:joseph280996/neovim-config.git
+[submodule ".config/opencode"]
+	path = .config/opencode
+	url = git@github.com:joseph280996/opencode-config.git
+[submodule ".config/claude"]
+	path = .config/claude
+	url = git@github.com:joseph280996/claude-code-config.git

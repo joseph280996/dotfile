@@ -1,0 +1,49 @@
+{
+  "flatRateModels": [
+    "uk.anthropic.claude-opus-5-5-1m",
+    "uk.anthropic.claude-sonnet-5",
+    "zai-org/GLM-OCR",
+    "uk.anthropic.claude-opus-5-5",
+    "uk.anthropic.claude-sonnet-5-1m",
+    "uk.anthropic.claude-sonnet-5-5",
+    "glm-ocr-probe",
+    "glm-ocr-probe2",
+    "uk.anthropic.claude-sonnet-5-5-1m"
+  ],
+  "priceOverrides": {
+    "zai-org/GLM-5.3": {
+      "input": 0.03,
+      "output": 0.1,
+      "cacheRead": 0.006
+    },
+    "us.anthropic.claude-opus-5-5": {
+      "input": 4.4,
+      "output": 22,
+      "cacheRead": 0.22,
+      "cacheCreation": 5.5
+    },
+    "us.anthropic.claude-haiku-5-5": {
+      "input": 0.11,
+      "output": 0.55,
+      "cacheRead": 0.011,
+      "cacheCreation": 0.1375
+    },
+    "us.anthropic.claude-sonnet-5-5": {
+      "input": 2.2,
+      "output": 11,
+      "cacheRead": 0.11,
+      "cacheCreation": 2.75
+    },
+    "zai-org/GLM-5.3-Flash": {
+      "input": 0.015,
+      "output": 0.05,
+      "cacheRead": 0.003
+    },
+    "us.anthropic.claude-opus-5-5-1m": {
+      "input": 4.4,
+      "output": 22,
+      "cacheRead": 0.22,
+      "cacheCreation": 5.5
+    }
+  }
+}

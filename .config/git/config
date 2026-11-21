@@ -1,0 +1,48 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+  clean = git-lfs clean -- %f
+
+[core]
+  editor = 'nvim'
+
+[alias]
+  nah = "!f(){ git reset --hard; git clean -df; if [ -d ".git/rebase-apply" ] || [ -d ".git/rebase-merge" ]; then git rebase --abort; fi; }; f"
+  p = pull
+  co = checkout
+	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
+	st = status
+	sw = switch
+  swm = switch master
+	swn = switch -c
+	puo = push origin HEAD -u
+	puf = push --force-with-lease
+	aa = add -A
+  c = commit
+  cm = commit -m
+	ms = merge --squash
+	rs = reset --soft
+	alias = "!f() { git config --global alias.$1 \"$2\"; }; f"
+	ustash = stash --include-untracked
+  ls = log --oneline --graph
+	stashp = stash pop
+	stashd = stash drop
+	nbf = "!f() { git switch \"$1\" && git pull && git switch -c \"$2\"; }; f"
+
+[safe]
+	directory = D:/
+	directory = E:/Notebook/notes
+	directory = E:/Notebook/notes/School
+
+[user]
+	name = Pham, Tung
+	email = tung.pham@sscinc.com
+	signingkey = 1A0E24615BBB95D6
+
+# Must stay after [user]: includeIf is expanded in place, and git config
+# is last-wins. config-personal's own [user]/[commit]/[tag] block needs
+# to override the work defaults above for repos matching this remote,
+# not the other way around.
+[includeIf "hasconfig:remote.*.url:git@github.com:joseph280996/*"]
+	path = config-personal
